@@ -533,9 +533,9 @@
 <div class="screen" id="s-success">
   <div class="success-screen">
     <div class="success-icon"></div>
-    <div class="success-title" data-i18n="order_done">Заказ оформлен!</div>
+    <div class="success-title" data-i18n="order_done">Почти готово!</div>
     <div class="success-sub" id="success-sub">Для подтверждения вашего заказа напишите менеджеру — он всё проверит и отправит посылку.</div>
-    <a class="btn-manager" id="manager-link" href="#" target="_blank" onclick="trackEvent('manager_click', { src: 'order' })">
+    <a class="btn-manager" id="manager-link" href="#" target="_blank" onclick="onManagerClick(event)">
       <span>💬</span> <span data-i18n="write_manager">Написать менеджеру</span>
     </a>
     <button class="btn-secondary" onclick="newOrder()" data-i18n="new_order">Сделать новый заказ</button>
@@ -955,7 +955,7 @@ async function verifyAndCreateOrder(items, buyer, shipping) {
 
     if (!res.ok) {
       if (data.error === 'insufficient_stock') {
-        return { ok: false, message: tr('stock_checkout_error', data.sku) };
+        return { ok: false, message: tr('stock_checkout_error', itemNameBySku(data.sku)) };
       }
       return { ok: false, message: tr('stock_order_failed') };
     }
@@ -963,6 +963,55 @@ async function verifyAndCreateOrder(items, buyer, shipping) {
   } catch (e) {
     return { ok: false, message: tr('stock_connection_error') };
   }
+}
+
+// Название товара по артикулу — чтобы в сообщении об остатке клиент видел вкус, а не технический код
+function itemNameBySku(sku) {
+  const it = Object.values(cart).find(i => SKU_MAP[i.key] === sku);
+  return it ? `${it.modelName} ${it.flavor}` : sku;
+}
+
+// Предварительная проверка остатков БЕЗ создания заказа (заказ создаётся позже — по кнопке «Написать менеджеру»)
+async function checkCartStock() {
+  const need = {};
+  Object.values(cart).forEach(i => { const sku = SKU_MAP[i.key]; if (sku) need[sku] = (need[sku] || 0) + i.qty; });
+  const skus = Object.keys(need);
+  if (!skus.length) return { ok: true };
+  try {
+    const res = await fetch(`${PROXY_URL}/stock-bulk?skus=${encodeURIComponent(skus.join(','))}`);
+    const data = await res.json();
+    if (!res.ok || !data.results) return { ok: false, message: tr('stock_connection_error') };
+    for (const sku of skus) {
+      if ((data.results[sku] ?? 0) < need[sku]) return { ok: false, message: tr('stock_checkout_error', itemNameBySku(sku)) };
+    }
+    return { ok: true };
+  } catch (e) {
+    return { ok: false, message: tr('stock_connection_error') };
+  }
+}
+
+// Заказ, ожидающий создания в KeyCRM: создаётся только когда клиент нажимает «Написать менеджеру»
+let pendingOrder = null;   // { buyer, shipping, pay }
+let orderCreated = false;  // заказ уже создан в KeyCRM (защита от дублей)
+let managerBusy = false;
+
+async function onManagerClick(ev) {
+  trackEvent('manager_click', { src: 'order' });
+  if (orderCreated || !pendingOrder) return; // заказ уже есть (или нечего создавать) — обычный переход по ссылке
+  ev.preventDefault();
+  if (managerBusy) return;
+  managerBusy = true;
+  const link = document.getElementById('manager-link');
+  const url = link.href;
+  const r = await verifyAndCreateOrder(Object.values(cart), pendingOrder.buyer, pendingOrder.shipping);
+  managerBusy = false;
+  if (!r.ok) { showModal(r.message); return; }
+  orderCreated = true;
+  trackEvent('order_submitted', { pay: pendingOrder.pay, total: cartTotal() });
+  try {
+    if (window.Telegram?.WebApp?.openTelegramLink) Telegram.WebApp.openTelegramLink(url);
+    else window.open(url, '_blank');
+  } catch (e) { window.open(url, '_blank'); }
 }
 
 // Кэш остатков: sku -> количество доступно
@@ -1037,7 +1086,7 @@ const TRANS = {
     confirm_btn: 'Подтвердить данные ',
     phone_hint: 'Польский номер в формате +48 (xxx) xxx-xxx',
     paczkomat_hint: 'Найдите код на сайте InPost или в приложении',
-    order_done: 'Заказ оформлен!',
+    order_done: 'Почти готово!',
     success_sub_cod: 'Для подтверждения вашего заказа напишите менеджеру — он всё проверит и отправит посылку.',
     success_sub_crypto: 'Для подтверждения заказа и получения реквизитов напишите менеджеру.',
     write_manager: 'Написать менеджеру',
@@ -1130,7 +1179,7 @@ const TRANS = {
     confirm_btn: 'Potwierdź dane ',
     phone_hint: 'Numer polski w formacie +48 (xxx) xxx-xxx',
     paczkomat_hint: 'Znajdź kod na stronie InPost lub w aplikacji',
-    order_done: 'Zamówienie złożone!',
+    order_done: 'Prawie gotowe!',
     success_sub_cod: 'Aby potwierdzić zamówienie, napisz do menedżera — sprawdzi wszystko i wyśle paczkę.',
     success_sub_crypto: 'Aby potwierdzić zamówienie i otrzymać dane do płatności, napisz do menedżera.',
     write_manager: 'Napisz do menedżera',
@@ -2370,16 +2419,13 @@ function buildOrderLines() {
 async function submitCrypto() {
   // Проверка склада + резервирование в KeyCRM (те же отслеживаемые товары, что и в SKU_MAP).
   // Имя/телефон в этом способе оплаты не собираются — менеджер получит их позже в переписке.
-  const stockCheck = await verifyAndCreateOrder(
-    Object.values(cart),
-    { full_name: 'Криптовалюта — ожидает данные от менеджера', phone: '' },
-    {}
-  );
+  const stockCheck = await checkCartStock();
   if (!stockCheck.ok) {
     showModal(stockCheck.message);
     return;
   }
-  trackEvent('order_submitted', { pay: 'crypto', total: cartTotal() });
+  pendingOrder = { buyer: { full_name: 'Криптовалюта — ожидает данные от менеджера', phone: '' }, shipping: {}, pay: 'crypto' };
+  orderCreated = false;
 
   const total = cartTotal();
   const delivery = getDeliveryCost();
@@ -2426,17 +2472,14 @@ async function submitCOD() {
     if (!kod || !ulica || !budynek) { showModal(tr('fill_required')); return; }
   }
 
-  // Проверка склада + резервирование в KeyCRM (пилот — только товары из SKU_MAP)
-  const stockCheck = await verifyAndCreateOrder(
-    Object.values(cart),
-    { full_name: name, phone },
-    { shipping_address_city: miasto }
-  );
+  // Только проверка остатков. Сам заказ в KeyCRM создастся по кнопке «Написать менеджеру» на экране успеха.
+  const stockCheck = await checkCartStock();
   if (!stockCheck.ok) {
     showModal(stockCheck.message);
     return;
   }
-  trackEvent('order_submitted', { pay: 'cod', total: cartTotal() });
+  pendingOrder = { buyer: { full_name: name, phone }, shipping: { shipping_address_city: miasto }, pay: 'cod' };
+  orderCreated = false;
 
   const total = cartTotal();
   const delivery = getDeliveryCost();
@@ -2478,6 +2521,9 @@ async function submitCOD() {
 
 function newOrder() {
   cart = {};
+  pendingOrder = null;
+  orderCreated = false;
+  managerBusy = false;
   orderPayment = null;
   orderDelivery = null;
   goTo('s-cats');
