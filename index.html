@@ -1052,6 +1052,9 @@ const TRANS = {
     sale_until: d => `до ${d}`,
     fill_required: 'Пожалуйста, заполните все обязательные поля (*)',
     fill_kod: 'Укажите Kod paczkomatu',
+    fill_zabka: 'Укажите адрес магазина Żabka или код пункта',
+    lbl_zabka: 'Адрес магазина Żabka или код пункта *',
+    zabka_hint: 'Улица и номер магазина Żabka либо код пункта InPost',
     cart_btn: 'Корзина',
     lbl_name: 'Imię i Nazwisko (Имя и Фамилия) *',
     lbl_city: 'Miasto (Город) *',
@@ -1142,6 +1145,9 @@ const TRANS = {
     sale_until: d => `do ${d}`,
     fill_required: 'Proszę wypełnić wszystkie wymagane pola (*)',
     fill_kod: 'Podaj Kod paczkomatu',
+    fill_zabka: 'Podaj adres sklepu Żabka lub kod punktu',
+    lbl_zabka: 'Adres sklepu Żabka lub kod punktu *',
+    zabka_hint: 'Ulica i numer sklepu Żabka lub kod punktu InPost',
     cart_btn: 'Koszyk',
     lbl_name: 'Imię i Nazwisko *',
     lbl_city: 'Miasto *',
@@ -2131,7 +2137,7 @@ function cartChangeQty(key, catId, delta) {
 // ORDER
 // ============================================================
 let orderPayment = null; // 'cod' | 'crypto'
-let orderDelivery = null; // 'paczkomat' | 'kurier'
+let orderDelivery = null; // 'paczkomat' | 'zabka' | 'kurier'
 
 function openOrder() {
   trackEvent('checkout_start');
@@ -2251,6 +2257,9 @@ function renderOrderForm() {
         <button class="selector-btn ${orderDelivery==='paczkomat'?'selected':''}" onclick="selectDelivery('paczkomat')">
           <span class="sel-icon"></span>Paczkomat InPost
         </button>
+        <button class="selector-btn ${orderDelivery==='zabka'?'selected':''}" onclick="selectDelivery('zabka')">
+          <span class="sel-icon"></span>Żabka
+        </button>
         <button class="selector-btn ${orderDelivery==='kurier'?'selected':''}" onclick="selectDelivery('kurier')">
           <span class="sel-icon"></span>Kurier
         </button>
@@ -2266,6 +2275,19 @@ function renderOrderForm() {
           <label>Kod paczkomatu *</label>
           <input type="text" id="f-kodpacz" placeholder="WAW01N" value="${document.getElementById('f-kodpacz')?.value||''}">
           <div class="hint">${tr('paczkomat_hint')}</div>
+        </div>`;
+    }
+
+    if (orderDelivery === 'zabka') {
+      html += `
+        <div class="form-group">
+          <label>${tr('lbl_city')}</label>
+          <input type="text" id="f-miasto" placeholder="Warszawa" value="${document.getElementById('f-miasto')?.value||''}">
+        </div>
+        <div class="form-group">
+          <label>${tr('lbl_zabka')}</label>
+          <input type="text" id="f-zabka" placeholder="ul. Marszałkowska 12" value="${document.getElementById('f-zabka')?.value||''}">
+          <div class="hint">${tr('zabka_hint')}</div>
         </div>`;
     }
 
@@ -2389,6 +2411,21 @@ async function submitCOD() {
     return;
   }
 
+  // Проверяем поля доставки ДО создания заказа (иначе при ошибке заказ уже создан в KeyCRM и повторная отправка даст дубль)
+  const kodpacz = (document.getElementById('f-kodpacz')?.value || '').trim();
+  const zabka = (document.getElementById('f-zabka')?.value || '').trim();
+  const kod = (document.getElementById('f-kod')?.value || '').trim();
+  const ulica = (document.getElementById('f-ulica')?.value || '').trim();
+  const budynek = (document.getElementById('f-budynek')?.value || '').trim();
+  const lokal = (document.getElementById('f-lokal')?.value || '').trim();
+  if (orderDelivery === 'paczkomat') {
+    if (!kodpacz || !/[a-zA-Z]/.test(kodpacz)) { showModal(tr('fill_kod')); return; }
+  } else if (orderDelivery === 'zabka') {
+    if (!zabka) { showModal(tr('fill_zabka')); return; }
+  } else {
+    if (!kod || !ulica || !budynek) { showModal(tr('fill_required')); return; }
+  }
+
   // Проверка склада + резервирование в KeyCRM (пилот — только товары из SKU_MAP)
   const stockCheck = await verifyAndCreateOrder(
     Object.values(cart),
@@ -2416,18 +2453,14 @@ async function submitCOD() {
   msg += `Telefon: ${phone}\n`;
 
   if (orderDelivery === 'paczkomat') {
-    const kodpacz = (document.getElementById('f-kodpacz')?.value || '').trim();
-    if (!kodpacz) { showModal(tr('fill_kod')); return; }
-    if (!/[a-zA-Z]/.test(kodpacz)) { showModal(tr('fill_kod')); return; }
     msg += `Dostawa: Paczkomat InPost\n`;
     msg += `Miasto: ${miasto}\n`;
     msg += `Kod paczkomatu: ${kodpacz}\n`;
+  } else if (orderDelivery === 'zabka') {
+    msg += `Dostawa: Żabka\n`;
+    msg += `Miasto: ${miasto}\n`;
+    msg += `Sklep Żabka / kod punktu: ${zabka}\n`;
   } else {
-    const kod = (document.getElementById('f-kod')?.value || '').trim();
-    const ulica = (document.getElementById('f-ulica')?.value || '').trim();
-    const budynek = (document.getElementById('f-budynek')?.value || '').trim();
-    const lokal = (document.getElementById('f-lokal')?.value || '').trim();
-    if (!kod || !ulica || !budynek) { showModal(tr('fill_required')); return; }
     msg += `Dostawa: Kurier\n`;
     msg += `Miasto: ${miasto}\n`;
     msg += `Kod pocztowy: ${kod}\n`;
