@@ -1,0 +1,936 @@
+<!doctype html>
+<html lang="pl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Snitch Shop — vapy z dostawą w Polsce</title>
+<meta name="description" content="Snitch Shop — e-papierosy, pody, cartridge i e-liquidy. Dostawa Paczkomat InPost, Żabka, kurier. Tylko dla osób 18+.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="images/logo-icon.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>:root{--bg:#0f0f13;--surface:#1a1a24;--surface2:#22222f;--accent:#00a8ff;--violet:#8a5cff;--text:#f0f0f5;--text2:#a4a4bb;--border:#2e2e40;--r:14px;--g:linear-gradient(135deg,#00a8ff,#8a5cff)}
+*{box-sizing:border-box;margin:0}html{scroll-behavior:smooth}
+body{background:radial-gradient(900px 400px at 85% -50px,rgba(138,92,255,.18),transparent),radial-gradient(700px 360px at 5% 0,rgba(0,168,255,.12),transparent),var(--bg);background-repeat:no-repeat;color:var(--text);font-family:Inter,Arial,sans-serif;font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+header{position:sticky;top:0;z-index:10;background:rgba(15,15,19,.8);backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
+.hd{display:flex;align-items:center;gap:24px;height:68px}
+.logo{white-space:nowrap;display:flex;align-items:center;gap:10px;font-weight:800;font-size:19px;letter-spacing:-.3px}
+.logo i{width:32px;height:32px;border-radius:9px;background:var(--g);display:grid;place-items:center;color:#fff}
+nav{display:flex;gap:4px}nav a{padding:10px 14px;border-radius:10px;font-size:14px;font-weight:500;color:var(--text2)}nav a.on,nav a:hover{color:var(--text);background:var(--surface2)}
+.sp{flex:1}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 18px;border-radius:12px;border:1px solid var(--border);background:var(--surface2);color:var(--text);font:600 14px Inter;cursor:pointer;transition:.18s}
+.btn:hover{border-color:var(--text)}.btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.btn.p{background:var(--g);border:0;color:#fff;box-shadow:0 6px 24px rgba(0,168,255,.25)}
+.btn.lg{min-height:52px;padding:0 24px;font-size:15px}
+.cnt{background:#fff;color:#111;border-radius:99px;font-size:12px;min-width:22px;height:22px;display:grid;place-items:center;padding:0 6px}
+.burger{display:none}
+h1{font-size:46px;line-height:1.08;letter-spacing:-1.2px;font-weight:800}h2{font-size:26px;letter-spacing:-.5px;font-weight:700;margin-bottom:16px}
+.sec{margin:44px 0}.sechead{display:flex;justify-content:space-between;align-items:baseline}.sechead a{color:var(--accent);font-size:14px;font-weight:600}
+.dev{position:relative;width:100%;height:100%;display:grid;place-items:center}
+.dev b{display:block;width:26%;height:68%;border-radius:18px;background:linear-gradient(160deg,var(--c1),var(--c2));box-shadow:0 14px 40px var(--c3),inset 0 0 0 1px rgba(255,255,255,.18)}
+.dev b::before{content:"";display:block;margin:8% auto 0;width:40%;height:7%;border-radius:4px;background:rgba(255,255,255,.55)}
+.ph{border-radius:12px;background:radial-gradient(circle at 50% 40%,rgba(255,255,255,.07),transparent 65%),var(--surface2);overflow:hidden}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r)}
+.price{font-weight:800;background:var(--g);-webkit-background-clip:text;color:transparent}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:4px 10px;border-radius:99px;border:1px solid var(--border);color:var(--text2)}
+footer{border-top:1px solid var(--border);margin-top:56px;padding:28px 0 110px;color:var(--text2);font-size:14px}
+.fgrid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:24px}.fgrid b{display:block;color:var(--text);margin-bottom:8px}.fgrid a{display:block;padding:4px 0}
+.age{margin-top:22px;padding-top:18px;border-top:1px solid var(--border);font-size:13px}
+.cartbar{display:none}
+@media(max-width:900px){.hd .btn.p span:not(.cnt){display:none}nav,.hd .btn.l{display:none}.burger{display:inline-flex;padding:0;width:44px}h1{font-size:30px;letter-spacing:-.8px}.hd{gap:10px}.fgrid{grid-template-columns:1fr}
+.cartbar{display:flex;position:sticky;margin-top:0;position:fixed;left:12px;right:12px;bottom:12px;z-index:20;padding:0 18px;min-height:56px;border-radius:16px;background:var(--g);color:#fff;font-weight:700;align-items:center;justify-content:space-between;box-shadow:0 10px 30px rgba(0,0,0,.5)}}
+.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:36px;align-items:center;padding:52px 0 12px}
+.hero p{color:var(--text2);font-size:18px;margin:16px 0 26px;max-width:520px}.acts{display:flex;gap:12px;flex-wrap:wrap}
+.hero .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}
+.ban{aspect-ratio:746/400;border-radius:20px;border:1px solid rgba(255,255,255,.25);background:linear-gradient(135deg,#14284d,#3a1f5e);position:relative;overflow:hidden;box-shadow:0 20px 60px rgba(138,92,255,.25)}
+.ban .t{position:absolute;left:24px;top:22px;max-width:55%;font-weight:800;font-size:22px}.ban .t small{display:block;font-weight:500;font-size:13px;color:#d6d6ec}
+.perks{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:34px}.perk{padding:16px;display:flex;gap:12px}.perk svg{color:var(--accent);margin-top:2px}.perk b{display:block;font-size:15px}.perk span{font-size:13px;color:var(--text2)}
+.cats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.cat{overflow:hidden;border-color:#fff3;transition:.2s}.cat:hover{transform:translateY(-3px);border-color:#fff}.cat .ph{height:150px;border-radius:0}.cat .t{padding:14px 16px;display:flex;justify-content:space-between;align-items:center;font-weight:700}.cat small{display:block;color:var(--text2);font-weight:500;font-size:13px}
+.models{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.m{padding:12px;position:relative;transition:.2s}.m:hover{border-color:#fff6}.m .ph{aspect-ratio:1;margin-bottom:12px}.m b{font-size:15px;display:block}.m .price{margin-top:2px}.badge{position:absolute;top:20px;left:20px;z-index:2;font-size:11px;font-weight:700;padding:3px 9px;border-radius:99px;background:#fff;color:#111}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.step{padding:20px}.step span{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--g);font-weight:800;margin-bottom:12px}.step p{color:var(--text2);font-size:14px;margin-top:4px}
+.tg{display:grid;grid-template-columns:1fr 1fr;gap:14px}.tgc{padding:24px;display:flex;gap:16px;align-items:flex-start;border-color:#fff3}.tgc .ico{width:48px;height:48px;border-radius:14px;background:var(--surface2);display:grid;place-items:center;color:var(--accent);flex:none}.tgc p{color:var(--text2);font-size:14px;margin:4px 0 14px}
+@media(max-width:900px){.hero{grid-template-columns:1fr;padding-top:22px;gap:22px}.hero p{font-size:16px;margin:12px 0 20px}.acts .btn{flex:1}.perks,.cats,.models{grid-template-columns:1fr 1fr}.steps,.tg{grid-template-columns:1fr}.perk{flex-direction:column;gap:6px}.cat .ph{height:110px}.sec{margin:34px 0}}.ph img{width:100%;height:100%;object-fit:cover;display:block}.ban img{width:100%;height:100%;object-fit:cover;display:block}.m .ph img,.side .ph img{object-fit:cover}i[hidden]{display:none!important}.cat .ph{height:200px!important}@media(max-width:900px){.cat .ph{height:130px!important}}:root{--bg:#0f0f13;--surface:#1a1a24;--surface2:#22222f;--accent:#00a8ff;--violet:#8a5cff;--text:#f0f0f5;--text2:#a4a4bb;--border:#2e2e40;--r:14px;--g:linear-gradient(135deg,#00a8ff,#8a5cff)}
+*{box-sizing:border-box;margin:0}html{scroll-behavior:smooth}
+body{background:radial-gradient(900px 400px at 85% -50px,rgba(138,92,255,.18),transparent),radial-gradient(700px 360px at 5% 0,rgba(0,168,255,.12),transparent),var(--bg);background-repeat:no-repeat;color:var(--text);font-family:Inter,Arial,sans-serif;font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+header{position:sticky;top:0;z-index:10;background:rgba(15,15,19,.8);backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
+.hd{display:flex;align-items:center;gap:24px;height:68px}
+.logo{white-space:nowrap;display:flex;align-items:center;gap:10px;font-weight:800;font-size:19px;letter-spacing:-.3px}
+.logo i{width:32px;height:32px;border-radius:9px;background:var(--g);display:grid;place-items:center;color:#fff}
+nav{display:flex;gap:4px}nav a{padding:10px 14px;border-radius:10px;font-size:14px;font-weight:500;color:var(--text2)}nav a.on,nav a:hover{color:var(--text);background:var(--surface2)}
+.sp{flex:1}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 18px;border-radius:12px;border:1px solid var(--border);background:var(--surface2);color:var(--text);font:600 14px Inter;cursor:pointer;transition:.18s}
+.btn:hover{border-color:var(--text)}.btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.btn.p{background:var(--g);border:0;color:#fff;box-shadow:0 6px 24px rgba(0,168,255,.25)}
+.btn.lg{min-height:52px;padding:0 24px;font-size:15px}
+.cnt{background:#fff;color:#111;border-radius:99px;font-size:12px;min-width:22px;height:22px;display:grid;place-items:center;padding:0 6px}
+.burger{display:none}
+h1{font-size:46px;line-height:1.08;letter-spacing:-1.2px;font-weight:800}h2{font-size:26px;letter-spacing:-.5px;font-weight:700;margin-bottom:16px}
+.sec{margin:44px 0}.sechead{display:flex;justify-content:space-between;align-items:baseline}.sechead a{color:var(--accent);font-size:14px;font-weight:600}
+.dev{position:relative;width:100%;height:100%;display:grid;place-items:center}
+.dev b{display:block;width:26%;height:68%;border-radius:18px;background:linear-gradient(160deg,var(--c1),var(--c2));box-shadow:0 14px 40px var(--c3),inset 0 0 0 1px rgba(255,255,255,.18)}
+.dev b::before{content:"";display:block;margin:8% auto 0;width:40%;height:7%;border-radius:4px;background:rgba(255,255,255,.55)}
+.ph{border-radius:12px;background:radial-gradient(circle at 50% 40%,rgba(255,255,255,.07),transparent 65%),var(--surface2);overflow:hidden}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r)}
+.price{font-weight:800;background:var(--g);-webkit-background-clip:text;color:transparent}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:4px 10px;border-radius:99px;border:1px solid var(--border);color:var(--text2)}
+footer{border-top:1px solid var(--border);margin-top:56px;padding:28px 0 110px;color:var(--text2);font-size:14px}
+.fgrid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:24px}.fgrid b{display:block;color:var(--text);margin-bottom:8px}.fgrid a{display:block;padding:4px 0}
+.age{margin-top:22px;padding-top:18px;border-top:1px solid var(--border);font-size:13px}
+.cartbar{display:none}
+@media(max-width:900px){.hd .btn.p span:not(.cnt){display:none}nav,.hd .btn.l{display:none}.burger{display:inline-flex;padding:0;width:44px}h1{font-size:30px;letter-spacing:-.8px}.hd{gap:10px}.fgrid{grid-template-columns:1fr}
+.cartbar{display:flex;position:sticky;margin-top:0;position:fixed;left:12px;right:12px;bottom:12px;z-index:20;padding:0 18px;min-height:56px;border-radius:16px;background:var(--g);color:#fff;font-weight:700;align-items:center;justify-content:space-between;box-shadow:0 10px 30px rgba(0,0,0,.5)}}
+.crumb{display:flex;align-items:center;gap:6px;color:var(--text2);font-size:14px;padding:22px 0 14px}
+.layout{display:grid;grid-template-columns:420px 1fr;gap:28px;align-items:start}
+.side{position:sticky;top:90px}.side .ph{aspect-ratio:1;margin-bottom:14px}.side h1{font-size:32px;letter-spacing:-.8px}.side .price{font-size:22px;margin:6px 0 14px}
+table{width:100%;border-collapse:collapse;font-size:14px}td,th{padding:11px 14px;text-align:left;border-bottom:1px solid var(--border)}th{color:var(--text2);font-weight:500;font-size:13px}tr:last-child td{border:0}tr.now td{background:rgba(0,168,255,.12)}tr.now td:last-child{color:var(--accent);font-weight:700}
+.fl{display:grid;grid-template-columns:1fr 1fr;gap:10px}.f{display:flex;align-items:center;justify-content:space-between;padding:8px 8px 8px 16px;min-height:60px}.f.has{border-color:#fff}.f.out{opacity:.55}.f span{font-weight:500;font-size:15px}.f small{display:block;color:#8b8b96;font-size:12px}
+.q{display:flex;align-items:center;gap:4px}.q button{width:44px;height:44px;border-radius:12px;border:1px solid var(--border);background:var(--surface2);color:var(--text);display:grid;place-items:center;cursor:pointer}.q button:hover{border-color:#fff}.q em{min-width:28px;text-align:center;font-style:normal;font-weight:700}
+.q.dis button{opacity:.3}
+.search{margin:0 0 12px;padding:0 16px;min-height:48px;display:flex;align-items:center;gap:10px;color:var(--text2)}
+@media(max-width:900px){.layout{grid-template-columns:1fr;gap:16px}.side{position:static}.side .ph{aspect-ratio:1.7}.fl{grid-template-columns:1fr}.side h1{font-size:26px}}.ph img{width:100%;height:100%;object-fit:cover;display:block}.ban img{width:100%;height:100%;object-fit:cover;display:block}.m .ph img,.side .ph img{object-fit:cover}i[hidden]{display:none!important}.cat .ph{height:200px!important}@media(max-width:900px){.cat .ph{height:130px!important}}@media(max-width:900px){.side .ph{aspect-ratio:1!important;max-width:360px;margin:0 auto 14px}}
+.pg{padding-top:26px}.pg h1{font-size:34px;margin-bottom:6px}.sub{color:var(--text2);margin-bottom:20px}
+.two{display:grid;grid-template-columns:1fr 380px;gap:24px;align-items:start}
+.row{display:flex;gap:14px;align-items:center;padding:12px;margin-bottom:10px}.row .th{width:76px;height:76px;border-radius:12px;overflow:hidden;flex:none;background:#000}.row .th img{width:100%;height:100%;object-fit:cover}.row .nm{flex:1;min-width:0}.row b{display:block}.row small{color:var(--text2);font-size:13px}.row .sm{font-weight:700;min-width:70px;text-align:right}
+.sum{padding:20px;position:sticky;top:90px}.sum .l{display:flex;justify-content:space-between;padding:7px 0;color:var(--text2);font-size:15px}.sum .l b{color:var(--text)}.sum .tot{border-top:1px solid var(--border);margin-top:8px;padding-top:14px;display:flex;justify-content:space-between;font-size:20px;font-weight:800}
+.up{background:rgba(34,197,94,.1);border:1px solid #22c55e55;border-radius:12px;padding:12px 14px;font-size:14px;color:#4ade80;margin:12px 0}
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px}.seg div{min-height:52px;display:flex;align-items:center;justify-content:center;border:1px solid var(--border);border-radius:12px;background:var(--surface2);font-weight:600}.seg .on{border-color:#fff;background:var(--surface)}
+label{display:block;font-size:13px;color:var(--text2);margin:14px 0 6px;font-weight:500}.in{min-height:48px;display:flex;align-items:center;padding:0 14px;border:1px solid var(--border);border-radius:12px;background:var(--surface2)}.in.v{color:var(--text)}.in.ph2{color:#6d6d85}.hint{font-size:12px;color:var(--text2);margin-top:5px}
+.fm{padding:24px}.fm h3{font-size:16px;margin:6px 0 4px}
+.ok{width:76px;height:76px;border-radius:50%;background:var(--g);display:grid;place-items:center;margin:0 auto 18px;box-shadow:0 10px 40px rgba(0,168,255,.35)}.ok svg{width:36px;height:36px}
+.center{text-align:center;max-width:520px;margin:50px auto}.center h1{font-size:36px}.center p{color:var(--text2);margin:10px 0 24px}
+.info{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.info .card{padding:22px}.info h3{margin-bottom:10px;display:flex;gap:10px;align-items:center}.info h3 svg{color:var(--accent)}.info p{color:var(--text2);font-size:14px;margin-bottom:10px}.info .meth{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.gate{min-height:760px;display:grid;place-items:center;position:relative}.gate::before{content:"";position:absolute;inset:0;background:url(images/banner-oferta.png) center/cover;filter:blur(18px) brightness(.35)}
+.dlg{position:relative;max-width:420px;width:calc(100% - 32px);padding:30px;text-align:center;border-color:#fff4;box-shadow:0 30px 80px rgba(0,0,0,.6)}.dlg h2{margin:14px 0 8px}.dlg p{color:var(--text2);font-size:14px;margin-bottom:20px}.dlg .btn{width:100%;margin-top:10px}
+.lg2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:18px 0}.lg2 div{min-height:56px;display:grid;place-items:center;border:1px solid var(--border);border-radius:12px;font-weight:700;background:var(--surface2)}
+.mini .ph{height:auto}@media(max-width:900px){.card.row{flex-wrap:wrap}.row .nm{flex:1 1 calc(100% - 100px)}.row .q{margin-left:90px}.row .sm{margin-left:auto}}@media(max-width:900px){.mgrid{grid-template-columns:1fr!important}.row .price{font-size:14px}.row .nm b{font-size:15px}}
+@media(max-width:900px){.two{grid-template-columns:1fr}.sum{position:static}.info{grid-template-columns:1fr}.pg h1{font-size:26px}.row .sm{min-width:60px}.center{margin:30px auto}}
+.ov{position:fixed;inset:0;z-index:100;display:grid;place-items:center;background:rgba(8,8,11,.78);backdrop-filter:blur(10px);padding:16px}.ov.hidden{display:none}
+.dlg{position:relative}.dlg h2{margin:14px 0 8px}
+.lg2 div{cursor:pointer}.lg2 .sel{border-color:#fff;background:var(--surface)}
+input.in{width:100%;color:var(--text);font:400 16px Inter,Arial,sans-serif;outline:none}input.in:focus{border-color:var(--accent)}input.in::placeholder{color:#6d6d85}
+.search input{flex:1;background:none;border:0;outline:none;color:var(--text);font:400 16px Inter,Arial,sans-serif;min-height:46px}
+.seg div{cursor:pointer}.btn,.card.cat,.card.m,.card.row{cursor:pointer}a.btn{text-decoration:none}
+.mmenu{display:none;flex-direction:column;border-top:1px solid var(--border);background:var(--bg)}.mmenu.open{display:flex}.mmenu a{padding:14px 20px;font-weight:500;border-bottom:1px solid var(--border);cursor:pointer}
+@media(min-width:901px){.mmenu,.mmenu.open{display:none}}
+.card.row .th{background:#000}.f .q{flex:none}.fl{align-items:stretch}
+a:focus-visible,[role=button]:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.f.out .q{pointer-events:none}.crumb a:hover{color:var(--text)}.sale-note{color:#4ade80}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+@media(min-width:1000px){.models{grid-template-columns:repeat(4,1fr)}}
+</style></head><body>
+<div id="app"></div><div id="gate" class="ov hidden"></div><div id="modal" class="ov hidden"></div>
+<script>
+// ===== Snitch Shop — сайт (отдельный от мини-приложения) =====
+const MANAGER_USERNAME = 'SnitchShopManager';
+const PROXY_URL = 'https://snitchshop-proxy.snitch-api.workers.dev';
+const BOT_USERNAME = '';   // впишем юзернейм нового бота — появится кнопка «Открыть в Telegram»
+const IS_DRAFT = /\/test\//.test(location.pathname) || location.protocol === 'file:';  // в черновике статистику не пишем
+const IS_BOT = !!navigator.webdriver || /bot|crawl|spider|headless|preview|lighthouse/i.test(navigator.userAgent || '');
+const PRICING = {
+  disposable: { tiers: [[1,70],[3,65],[5,60],[10,55],[20,48],[50,45],[100,40]], base: 70 },
+  pods: { tiers: [[1,85]], base: 85 },
+  cartridges: { tiers: [[1,60]], base: 60 },
+  liquids: { tiers: [[1,50],[3,45],[5,40],[10,35],[20,32],[30,30],[40,28],[50,26],[100,24]], base: 50 }
+};
+const SALES = [];
+// ---------- тексты ----------
+const T = {
+ pl: {
+  nav_catalog:'Katalog', nav_delivery:'Dostawa', nav_payment:'Płatność', nav_returns:'Zwrot i wymiana', nav_contact:'Kontakt', cart:'Koszyk',
+  hero_h:'Vapy z dostawą<br>w całej Polsce', hero_p:'Wybieraj smaki i zbieraj koszyk — cena za sztukę spada razem z ilością. Potwierdzenie zamówienia w Telegramie.',
+  open_catalog:'Zobacz katalog', mini_app:'Mini-aplikacja', chip1:'13 modeli', chip2:'271 smaków',
+  perk1:'Smart Cena', perk1s:'Im więcej sztuk, tym niższa cena', perk2:'Płatność przy odbiorze', perk2s:'Lub kryptowaluta', perk3:'Dostawa od 25 zł', perk3s:'40 zł przy zamówieniu od 2500 zł', perk4:'Zwrot i wymiana', perk4s:'Zasady na stronie',
+  categories:'Kategorie', all_models:'Wszystkie modele', how:'Jak zamówić',
+  s1:'Wybierz smaki', s1s:'Dodaj produkty do koszyka — cena przeliczy się sama', s2:'Podaj dane dostawy', s2s:'Imię, telefon, Paczkomat, Żabka lub kurier', s3:'Napisz do menedżera', s3s:'Zamówienie jest zarezerwowane, menedżer potwierdza je w Telegramie',
+  tgapp:'Mini-aplikacja w Telegramie', tgapp_s:'Ten sam katalog w Telegramie — wygodniej z telefonu.', open_tg:'Otwórz w Telegramie', manager:'Menedżer', manager_s:'Pytania o dostępność, płatność i dostawę.',
+  home:'Strona główna', pick_model:'Wybierz model', models_n:n=>n===1?'model':n<5?'modele':'modeli', flavors_n:n=>n===1?'smak':n<5?'smaki':'smaków',
+  search:'Szukaj smaku', sale:'Promocja', out:'Wyprzedane', smart:'Smart Cena', pcs:'szt.', per_pcs:'zł/szt.', your_level:'Twój poziom',
+  cart_title:'Koszyk', cart_empty:'Koszyk pusty', cart_empty_sub:'Dodaj produkty z katalogu', positions:'Pozycji', discount:'Zniżka Smart Cena', total:'Razem', add_more:'Dodaj więcej', checkout:'Złóż zamówienie', pos_in_cart:'poz. w koszyku',
+  upsell:(n,p,s)=>`Dodaj jeszcze <b>${n} szt.</b> → cena <b>${p} zł/szt.</b>, zaoszczędzisz <b>${s} zł</b>`,
+  order_title:'Złożenie zamówienia', your_order:'Twoje zamówienie:', saving:'Oszczędność Smart Cena', pay_section:'Metoda płatności', pay_cod:'Pobranie', pay_crypto:'Kryptowaluta',
+  crypto_hint:'Po kliknięciu przycisku poniżej — napisz do menedżera, prześle dane do płatności i potwierdzi zamówienie.', recipient:'Dane odbiorcy', delivery_section:'Sposób dostawy',
+  lbl_name:'Imię i Nazwisko *', lbl_phone:'Telefon *', phone_hint:'Numer polski w formacie +48 xxx xxx xxx', lbl_city:'Miasto *', lbl_kodpacz:'Kod paczkomatu *', paczkomat_hint:'Znajdź kod na stronie InPost lub w aplikacji',
+  lbl_zabka:'Adres sklepu Żabka lub kod punktu *', zabka_hint:'Ulica i numer sklepu Żabka lub kod punktu InPost', lbl_zip:'Kod pocztowy *', lbl_street:'Ulica *', lbl_building:'Numer budynku *', lbl_flat:'Numer lokalu', lbl_flat_ph:'5 (opcjonalnie)',
+  d_paczkomat:'Paczkomat', d_zabka:'Żabka', d_kurier:'Kurier', delivery_cost:'Cena dostawy', total_to_pay:'Razem do zapłaty', confirm:'Potwierdź dane',
+  done_h:'Prawie gotowe!', done_cod:'Aby potwierdzić zamówienie, napisz do menedżera — sprawdzi wszystko i wyśle paczkę.', done_crypto:'Aby potwierdzić zamówienie i otrzymać dane do płatności, napisz do menedżera.', write_manager:'Napisz do menedżera', new_order:'Złóż nowe zamówienie',
+  pay:'Płatność', delivery:'Dostawa',
+  fill_required:'Proszę wypełnić wszystkie wymagane pola (*)', fill_phone:'Podaj poprawny numer telefonu', fill_kod:'Podaj Kod paczkomatu', fill_zabka:'Podaj adres sklepu Żabka lub kod punktu',
+  stock_limit_partial:'Niestety, nie mamy już tyle tego smaku.', stock_limit_zero:'Ten smak został wyprzedany.', stock_checkout_error:n=>`Niestety, produktu "${n}" zabrakło w takiej ilości. Zmniejsz liczbę i spróbuj ponownie.`,
+  stock_order_failed:'Nie udało się złożyć zamówienia. Spróbuj ponownie.', stock_connection_error:'Błąd połączenia z serwerem. Sprawdź internet i spróbuj ponownie.', max_limit:'Maksimum 200 sztuk w koszyku. Aby zamówić więcej, skontaktuj się z menedżerem.',
+  info_h:'Dostawa, płatność, zwrot', info_s:'Najważniejsze informacje w jednym miejscu',
+  i_paczkomat:'<b>Paczkomat</b> – odbiór osobisty w Paczkomacie.', i_zabka:'<b>Żabka</b> – odbiór osobisty w sklepie Żabka.', i_kurier:'<b>Kurier</b> – paczka dostarczana bezpośrednio pod drzwi.',
+  i_pay_courier:'Przy dostawie kurierem:', i_pay_pickup:'Przy odbiorze (Paczkomat/Żabka):', i_pay_crypto:'Przedpłata kryptowalutą:',
+  i_ret1:'1. Napisz menedżerowi na Telegramie i opisz problem.', i_ret2:'2. Wyślij zdjęcie lub wideo pokazujące wadę produktu.',
+  foot_about:'Dostawa w Polsce: Paczkomat InPost, Żabka, kurier.<br>Zamówienie potwierdza menedżer w Telegramie.', foot_info:'Informacje', foot_contact:'Kontakt', foot_age:'Strona tylko dla osób pełnoletnich (18+). Produkty zawierają nikotynę, która uzależnia.',
+  age_title:'Czy masz ukończone 18 lat?', age_text:'Produkty zawierają nikotynę, która uzależnia. Sprzedaż tylko osobom pełnoletnim.', age_yes:'Tak, mam 18+', age_no:'Nie', sorry:'Przykro nam', sorry_text:'Strona tylko dla osób pełnoletnich.', pick_lang:'Wybierz język', ok:'OK',
+  msg_greeting:'Dzień dobry, proszę o potwierdzenie zamówienia', order_word:'ZAMÓWIENIE', price_word:'CENA', lang_btn:'RU', from:'od', tab_hit:'Hit',
+ },
+ ru: {
+  nav_catalog:'Каталог', nav_delivery:'Доставка', nav_payment:'Оплата', nav_returns:'Возврат и замена', nav_contact:'Контакты', cart:'Корзина',
+  hero_h:'Вейпы с доставкой<br>по всей Польше', hero_p:'Выбирайте вкусы, собирайте корзину — цена за штуку падает вместе с количеством. Подтверждение заказа в Telegram.',
+  open_catalog:'Открыть каталог', mini_app:'Мини-приложение', chip1:'13 моделей', chip2:'271 вкус',
+  perk1:'Smart Cena', perk1s:'Чем больше штук, тем ниже цена', perk2:'Оплата при получении', perk2s:'Или криптовалюта', perk3:'Доставка от 25 zł', perk3s:'40 zł для заказов от 2500 zł', perk4:'Возврат и замена', perk4s:'Условия на странице',
+  categories:'Категории', all_models:'Все модели', how:'Как заказать',
+  s1:'Выберите вкусы', s1s:'Добавьте товары в корзину, цена пересчитается сама', s2:'Заполните доставку', s2s:'Имя, телефон, Paczkomat, Żabka или курьер', s3:'Напишите менеджеру', s3s:'Заказ резервируется, менеджер подтверждает в Telegram',
+  tgapp:'Мини-приложение в Telegram', tgapp_s:'Тот же каталог внутри Telegram — быстрее с телефона.', open_tg:'Открыть в Telegram', manager:'Менеджер', manager_s:'Вопросы по наличию, оплате и доставке.',
+  home:'Главная', pick_model:'Выберите модель', models_n:n=>n===1?'модель':n<5?'модели':'моделей', flavors_n:n=>n===1?'вкус':n<5?'вкуса':'вкусов',
+  search:'Поиск по вкусам', sale:'Акция', out:'Нет в наличии', smart:'Smart Cena', pcs:'шт.', per_pcs:'zł/шт.', your_level:'Ваш уровень',
+  cart_title:'Корзина', cart_empty:'Корзина пуста', cart_empty_sub:'Добавьте товары из каталога', positions:'Позиций', discount:'Скидка Smart Cena', total:'Итого', add_more:'Добавить ещё', checkout:'Оформить заказ', pos_in_cart:'поз. в корзине',
+  upsell:(n,p,s)=>`Добавьте ещё <b>${n} шт.</b> → цена <b>${p} zł/шт.</b>, сэкономите <b>${s} zł</b>`,
+  order_title:'Оформление заказа', your_order:'Ваш заказ:', saving:'Экономия Smart Cena', pay_section:'Способ оплаты', pay_cod:'Оплата при получении', pay_crypto:'Криптовалюта',
+  crypto_hint:'После нажатия кнопки ниже напишите менеджеру — он пришлёт данные для оплаты и подтвердит заказ.', recipient:'Данные получателя', delivery_section:'Способ доставки',
+  lbl_name:'Имя и фамилия *', lbl_phone:'Телефон *', phone_hint:'Польский номер в формате +48 xxx xxx xxx', lbl_city:'Город *', lbl_kodpacz:'Код пачкомата *', paczkomat_hint:'Найдите код на сайте InPost или в приложении',
+  lbl_zabka:'Адрес магазина Żabka или код пункта *', zabka_hint:'Улица и номер магазина Żabka или код пункта InPost', lbl_zip:'Почтовый индекс *', lbl_street:'Улица *', lbl_building:'Номер дома *', lbl_flat:'Номер квартиры', lbl_flat_ph:'5 (необязательно)',
+  d_paczkomat:'Paczkomat', d_zabka:'Żabka', d_kurier:'Курьер', delivery_cost:'Стоимость доставки', total_to_pay:'Итого к оплате', confirm:'Подтвердить данные',
+  done_h:'Почти готово!', done_cod:'Чтобы подтвердить заказ, напишите менеджеру — он всё проверит и отправит посылку.', done_crypto:'Чтобы подтвердить заказ и получить данные для оплаты, напишите менеджеру.', write_manager:'Написать менеджеру', new_order:'Оформить новый заказ',
+  pay:'Оплата', delivery:'Доставка',
+  fill_required:'Пожалуйста, заполните все обязательные поля (*)', fill_phone:'Укажите корректный номер телефона', fill_kod:'Укажите код пачкомата', fill_zabka:'Укажите адрес магазина Żabka или код пункта',
+  stock_limit_partial:'Больше этого вкуса, к сожалению, нет в наличии.', stock_limit_zero:'Этот вкус временно закончился.', stock_checkout_error:n=>`К сожалению, товара "${n}" уже не хватает в нужном количестве. Уменьшите количество и попробуйте снова.`,
+  stock_order_failed:'Не удалось оформить заказ. Попробуйте ещё раз.', stock_connection_error:'Ошибка соединения с сервером. Проверьте интернет и попробуйте снова.', max_limit:'Максимум 200 штук в корзине. Для большего количества напишите менеджеру.',
+  info_h:'Доставка, оплата, возврат', info_s:'Самое важное в одном месте',
+  i_paczkomat:'<b>Paczkomat</b> – самовывоз посылки в Paczkomat.', i_zabka:'<b>Żabka</b> – самовывоз посылки в магазине Żabka.', i_kurier:'<b>Курьер</b> – посылка доставляется прямо к вашей двери.',
+  i_pay_courier:'При доставке курьером:', i_pay_pickup:'При самовывозе (Paczkomat/Żabka):', i_pay_crypto:'Предоплата криптовалютой:',
+  i_ret1:'1. Напиши менеджеру в Telegram и опиши проблему.', i_ret2:'2. Отправь фото или видео, показывающее дефект товара.',
+  foot_about:'Доставка по Польше: InPost Paczkomat, Żabka, курьер.<br>Заказ подтверждает менеджер в Telegram.', foot_info:'Информация', foot_contact:'Связь', foot_age:'Сайт только для лиц старше 18 лет. Товары содержат никотин, вызывающий привыкание.',
+  age_title:'Вам есть 18 лет?', age_text:'Товары содержат никотин, вызывающий привыкание. Продажа только лицам старше 18 лет.', age_yes:'Да, мне 18+', age_no:'Нет', sorry:'Сожалеем', sorry_text:'Сайт только для лиц старше 18 лет.', pick_lang:'Выберите язык', ok:'OK',
+  msg_greeting:'Dzień dobry, proszę o potwierdzenie zamówienia', order_word:'ЗАКАЗ', price_word:'CENA', lang_btn:'PL', from:'от', tab_hit:'Хит',
+ }
+};
+let lang = 'pl';
+try { lang = localStorage.getItem('vl_lang') || ''; } catch(e) {}
+const hasLang = lang === 'pl' || lang === 'ru'; if (!hasLang) lang = 'pl';
+const t = (k, ...a) => { const v = (T[lang][k] ?? T.pl[k] ?? k); return typeof v === 'function' ? v(...a) : v; };
+const catName = c => lang === 'pl' && c.name_pl ? c.name_pl : c.name;
+
+// ---------- данные ----------
+const SKU_MAP = {
+  // maskking
+  'maskking::Alaska Ice': 'maskking-alaska-ice',
+  'maskking::Banana Taffy Freeze': 'maskking-banana-taffy-freeze',
+  'maskking::Black Ice Dragonfruit': 'maskking-black-ice-dragonfruit',
+  'maskking::Blue Razz Ice': 'maskking-blue-razz-ice',
+  'maskking::Cheesecake': 'maskking-cheesecake',
+  'maskking::Frozen Pina Colada': 'maskking-frozen-pina-colada',
+  'maskking::Fruity Cool Strawberry': 'maskking-fruity-cool-strawberry',
+  'maskking::Grape Slush': 'maskking-grape-slush',
+  'maskking::Juicy Peach Ice': 'maskking-juicy-peach-ice',
+  'maskking::Mexico Mango': 'maskking-mexico-mango',
+  'maskking::Miami Mint': 'maskking-miami-mint',
+  'maskking::Omg B Burst': 'maskking-omg-b-burst',
+  'maskking::Sour Apple Ice': 'maskking-sour-apple-ice',
+  'maskking::Sour Triple Berry': 'maskking-sour-triple-berry',
+  'maskking::Strawberry B-Burst': 'maskking-strawberry-b-burst',
+  'maskking::Strawberry Watermelon': 'maskking-strawberry-watermelon',
+  'maskking::Triple Cherry': 'maskking-triple-cherry',
+  'maskking::Watermelon Ice': 'maskking-watermelon-ice',
+  'maskking::White Gummy Ice': 'maskking-white-gummy-ice',
+  'maskking::Wild Cherry Slush': 'maskking-wild-cherry-slush',
+  'maskking::Zesty Grapefruit': 'maskking-zesty-grapefruit',
+  // elfmoon
+  'elfmoon::Blue razz ice': 'elfmoon-blue-razz-ice',
+  'elfmoon::Cherry Watermelon': 'elfmoon-cherry-watermelon',
+  'elfmoon::Grape Ice': 'elfmoon-grape-ice',
+  'elfmoon::Grape Raspberry': 'elfmoon-grape-raspberry',
+  'elfmoon::Kiwi passion fruit guava': 'elfmoon-kiwi-passion-fruit-guava',
+  'elfmoon::Lemon lime': 'elfmoon-lemon-lime',
+  'elfmoon::Lime Cola': 'elfmoon-lime-cola',
+  'elfmoon::Mango Peach Watermelon': 'elfmoon-mango-peach-watermelon',
+  'elfmoon::Miami mint': 'elfmoon-miami-mint',
+  'elfmoon::Peach ice': 'elfmoon-peach-ice',
+  'elfmoon::Pomegranate Burst': 'elfmoon-pomegranate-burst',
+  'elfmoon::Watermelon Ice': 'elfmoon-watermelon-ice',
+  // lushking
+  'lushking::Black Currant Pineapple': 'lushking-black-currant-pineapple',
+  'lushking::Black Grape Ice': 'lushking-black-grape-ice',
+  'lushking::Blue Razz Ice': 'lushking-blue-razz-ice',
+  'lushking::Cactus Lime': 'lushking-cactus-lime',
+  'lushking::Cherry Burst': 'lushking-cherry-burst',
+  'lushking::Cucumber Lime': 'lushking-cucumber-lime',
+  'lushking::Milky Oolong': 'lushking-milky-oolong',
+  'lushking::Mountain Mint': 'lushking-mountain-mint',
+  'lushking::Pomegranate Burst': 'lushking-pomegranate-burst',
+  'lushking::Sour Apple ice': 'lushking-sour-apple-ice',
+  'lushking::Sour Pineapple Ice': 'lushking-sour-pineapple-ice',
+  'lushking::Sour Strawberry Dragonfruit': 'lushking-sour-strawberry-dragonfruit',
+  'lushking::Starfruit Grape': 'lushking-starfruit-grape',
+  'lushking::Tropical Mango': 'lushking-tropical-mango',
+  'lushking::Watermelon ice': 'lushking-watermelon-ice',
+  // elfbc45k
+  'elfbc45k::Blackberry Lemonade': 'elfbc45k-blackberry-lemonade',
+  'elfbc45k::Blackcurrant Grape': 'elfbc45k-blackcurrant-grape',
+  'elfbc45k::Blue Razz Ice': 'elfbc45k-blue-razz-ice',
+  'elfbc45k::Cherry Peach Soda': 'elfbc45k-cherry-peach-soda',
+  'elfbc45k::Double Mint': 'elfbc45k-double-mint',
+  'elfbc45k::Grapefruit Green Tea': 'elfbc45k-grapefruit-green-tea',
+  'elfbc45k::Kiwi Pineapple Peach': 'elfbc45k-kiwi-pineapple-peach',
+  'elfbc45k::Lemon Lime': 'elfbc45k-lemon-lime',
+  'elfbc45k::Pear Soda': 'elfbc45k-pear-soda',
+  'elfbc45k::Pomegranate Burst': 'elfbc45k-pomegranate-burst',
+  'elfbc45k::Pomegranate Raspberry Lime': 'elfbc45k-pomegranate-raspberry-lime',
+  'elfbc45k::Red Raspberry Strawberry': 'elfbc45k-red-raspberry-strawberry',
+  'elfbc45k::Sour Apple Kiwi': 'elfbc45k-sour-apple-kiwi',
+  'elfbc45k::Strawberry Grapefruit': 'elfbc45k-strawberry-grapefruit',
+  'elfbc45k::Watermelon Ice': 'elfbc45k-watermelon-ice',
+  // dojo
+  'dojo::Blue Razz Ice': 'dojo-blue-razz-ice',
+  'dojo::Blueberry Watermelon': 'dojo-blueberry-watermelon',
+  'dojo::Fcuking Fab': 'dojo-fcuking-fab',
+  'dojo::Frozen Banana': 'dojo-frozen-banana',
+  'dojo::Georgia Peach': 'dojo-georgia-peach',
+  'dojo::Hawaii Dream': 'dojo-hawaii-dream',
+  'dojo::Juicy Grape': 'dojo-juicy-grape',
+  'dojo::Miami Mint': 'dojo-miami-mint',
+  'dojo::Pink Lemonade': 'dojo-pink-lemonade',
+  'dojo::Sour Gush': 'dojo-sour-gush',
+  'dojo::Strawberry banana': 'dojo-strawberry-banana',
+  'dojo::Strawberry Ice': 'dojo-strawberry-ice',
+  'dojo::Watermelon Ice': 'dojo-watermelon-ice',
+  'dojo::White Gummy': 'dojo-white-gummy',
+  // elfd3
+  'elfd3::Alpine mint': 'elfd3-alpine-mint',
+  'elfd3::Apple peach': 'elfd3-apple-peach',
+  'elfd3::Blackberry cranberry': 'elfd3-blackberry-cranberry',
+  'elfd3::Blackberry pomegrn cherry': 'elfd3-blackberry-pomegrn-cherry',
+  'elfd3::Blue razz ice': 'elfd3-blue-razz-ice',
+  'elfd3::Blueberry ice': 'elfd3-blueberry-ice',
+  'elfd3::Blueberry raspberry': 'elfd3-blueberry-raspberry',
+  'elfd3::Double apple': 'elfd3-double-apple',
+  'elfd3::Grape cherry': 'elfd3-grape-cherry',
+  'elfd3::Grape ice': 'elfd3-grape-ice',
+  'elfd3::Grape mint': 'elfd3-grape-mint',
+  'elfd3::Kiwi passion fruit guava': 'elfd3-kiwi-passion-fruit-guava',
+  'elfd3::Kiwi pineapple ice': 'elfd3-kiwi-pineapple-ice',
+  'elfd3::Lemon lime': 'elfd3-lemon-lime',
+  'elfd3::Mango peach watermelon': 'elfd3-mango-peach-watermelon',
+  'elfd3::Peach berry': 'elfd3-peach-berry',
+  'elfd3::Peach ice': 'elfd3-peach-ice',
+  'elfd3::Pineapple mango ice': 'elfd3-pineapple-mango-ice',
+  'elfd3::Strawb raspberry cherry': 'elfd3-strawb-raspberry-cherry',
+  'elfd3::Strawberry grape': 'elfd3-strawberry-grape',
+  'elfd3::Strawberry ice': 'elfd3-strawberry-ice',
+  'elfd3::Strawberry watermelon': 'elfd3-strawberry-watermelon',
+  'elfd3::Vmt': 'elfd3-vmt',
+  'elfd3::Watermelon bubblegum': 'elfd3-watermelon-bubblegum',
+  'elfd3::Watermelon ice': 'elfd3-watermelon-ice',
+  'elfd3::Watermelon lemon': 'elfd3-watermelon-lemon',
+  // xrosmini
+  'xrosmini::Pastel Crystal': 'xrosmini-pastel-crystal',
+  'xrosmini::Rose Red': 'xrosmini-rose-red',
+  'xrosmini::Carbon Black': 'xrosmini-carbon-black',
+  'xrosmini::Purple': 'xrosmini-purple',
+  'xrosmini::Titanium silver': 'xrosmini-titanium-silver',
+  'xrosmini::Black': 'xrosmini-black',
+  'xrosmini::Flowing Blue': 'xrosmini-flowing-blue',
+  'xrosmini::Flowing Green': 'xrosmini-flowing-green',
+  'xrosmini::Flowing Pink': 'xrosmini-flowing-pink',
+  'xrosmini::Sky Blue': 'xrosmini-sky-blue',
+  // oxva
+  'oxva::Pink Ripple': 'oxva-pink-ripple',
+  'oxva::Black Carbon': 'oxva-black-carbon',
+  'oxva::Metal Silver': 'oxva-metal-silver',
+  'oxva::Light Brown Shadow': 'oxva-light-brown-shadow',
+  'oxva::Metal Blue': 'oxva-metal-blue',
+  'oxva::Black Shadow': 'oxva-black-shadow',
+  'oxva::Green Ripple': 'oxva-green-ripple',
+  'oxva::Blue Ripple': 'oxva-blue-ripple',
+  // cart-xros
+  'cart-xros::0.4 Ω': 'cart-xros-0-4-ohm',
+  'cart-xros::0.6 Ω': 'cart-xros-0-6-ohm',
+  'cart-xros::0.8 Ω': 'cart-xros-0-8-ohm',
+  // cart-oxva
+  'cart-oxva::0.4 Ω': 'cart-oxva-0-4-ohm',
+  'cart-oxva::0.6 Ω': 'cart-oxva-0-6-ohm',
+  'cart-oxva::0.8 Ω': 'cart-oxva-0-8-ohm',
+  // puffy
+  'puffy::Apple Grape Blueberry': 'puffy-apple-grape-blueberry',
+  'puffy::Banana cherry': 'puffy-banana-cherry',
+  'puffy::Berri kiwi': 'puffy-berri-kiwi',
+  'puffy::Berry Cherry Cocktail': 'puffy-berry-cherry-cocktail',
+  'puffy::Berry cherry cranberry': 'puffy-berry-cherry-cranberry',
+  'puffy::Black grape mint': 'puffy-black-grape-mint',
+  'puffy::Blackcurrant slush': 'puffy-blackcurrant-slush',
+  'puffy::Blue razz berry': 'puffy-blue-razz-berry',
+  'puffy::Blueberry Pomegranate': 'puffy-blueberry-pomegranate',
+  'puffy::Blueberry raspberry': 'puffy-blueberry-raspberry',
+  'puffy::Cherry Ice': 'puffy-cherry-ice',
+  'puffy::Cider berries': 'puffy-cider-berries',
+  'puffy::Cola Orange': 'puffy-cola-orange',
+  'puffy::Cranberry Grape': 'puffy-cranberry-grape',
+  'puffy::Currant cherry': 'puffy-currant-cherry',
+  'puffy::Energy Drink': 'puffy-energy-drink',
+  'puffy::Fall tea': 'puffy-fall-tea',
+  'puffy::Grape': 'puffy-grape',
+  'puffy::Grape Melon': 'puffy-grape-melon',
+  'puffy::Grape Raspberry Black Plum': 'puffy-grape-raspberry-black-plum',
+  'puffy::Gummy Bear': 'puffy-gummy-bear',
+  'puffy::Ice latte': 'puffy-ice-latte',
+  'puffy::Ice mojito mint': 'puffy-ice-mojito-mint',
+  'puffy::Juicy nectar': 'puffy-juicy-nectar',
+  'puffy::Lemon grapefruit': 'puffy-lemon-grapefruit',
+  'puffy::Lemon Mint': 'puffy-lemon-mint',
+  'puffy::Lemon Peach Passion': 'puffy-lemon-peach-passion',
+  'puffy::Lychee passion': 'puffy-lychee-passion',
+  'puffy::Mixed berries': 'puffy-mixed-berries',
+  'puffy::Peach Blueberry Ice': 'puffy-peach-blueberry-ice',
+  'puffy::Pineapple coconut': 'puffy-pineapple-coconut',
+  'puffy::Raspberry Watermelon': 'puffy-raspberry-watermelon',
+  'puffy::Red lemonade': 'puffy-red-lemonade',
+  'puffy::Rose Milk': 'puffy-rose-milk',
+  'puffy::Sangria': 'puffy-sangria',
+  'puffy::Skittles Candy': 'puffy-skittles-candy',
+  'puffy::Sour Strawberry': 'puffy-sour-strawberry',
+  'puffy::Strawberry dragon fruit': 'puffy-strawberry-dragon-fruit',
+  'puffy::Strawberry Lime': 'puffy-strawberry-lime',
+  'puffy::Strawberry watermelon': 'puffy-strawberry-watermelon',
+  'puffy::Sweet Orange Grapefruit': 'puffy-sweet-orange-grapefruit',
+  'puffy::Tropic punch': 'puffy-tropic-punch',
+  'puffy::Tropical Fruits': 'puffy-tropical-fruits',
+  'puffy::Turbo Mint': 'puffy-turbo-mint',
+  'puffy::Vitamin': 'puffy-vitamin',
+  'puffy::Watermelon Bubble gum': 'puffy-watermelon-bubble-gum',
+  'puffy::Watermelon raspberry': 'puffy-watermelon-raspberry',
+  // vozol
+  'vozol::Berry': 'vozol-berry',
+  'vozol::Berry Peach': 'vozol-berry-peach',
+  'vozol::Blue Cotton Candy': 'vozol-blue-cotton-candy',
+  'vozol::Blue raspberry': 'vozol-blue-raspberry',
+  'vozol::Blueberry Ice': 'vozol-blueberry-ice',
+  'vozol::Blueberry Razz Lemon': 'vozol-blueberry-razz-lemon',
+  'vozol::Blueberry watermelon': 'vozol-blueberry-watermelon',
+  'vozol::Cherry Cola': 'vozol-cherry-cola',
+  'vozol::Cherry lemon peach': 'vozol-cherry-lemon-peach',
+  'vozol::Cherry Vanilla Cream': 'vozol-cherry-vanilla-cream',
+  'vozol::Cola Gummies': 'vozol-cola-gummies',
+  'vozol::Dragon Fruit Banana Cherry': 'vozol-dragon-fruit-banana-cherry',
+  'vozol::Frozen Grape Soda': 'vozol-frozen-grape-soda',
+  'vozol::Grape cherry': 'vozol-grape-cherry',
+  'vozol::Grape Ice': 'vozol-grape-ice',
+  'vozol::Kiwi Passion Fruite Guava': 'vozol-kiwi-passion-fruite-guava',
+  'vozol::LavaFire': 'vozol-lavafire',
+  'vozol::Lemon Grapefruit': 'vozol-lemon-grapefruit',
+  'vozol::Lemon Lime': 'vozol-lemon-lime',
+  'vozol::Love 777': 'vozol-love-777',
+  'vozol::Lychee Mint': 'vozol-lychee-mint',
+  'vozol::Mint ice': 'vozol-mint-ice',
+  'vozol::Mixed Berries': 'vozol-mixed-berries',
+  'vozol::Peach Ice': 'vozol-peach-ice',
+  'vozol::Peach Mango Watermelon': 'vozol-peach-mango-watermelon',
+  'vozol::Perfume Lemon': 'vozol-perfume-lemon',
+  'vozol::Pineapple Passion Fruit Lime': 'vozol-pineapple-passion-fruit-lime',
+  'vozol::Pomegranate lemonade': 'vozol-pomegranate-lemonade',
+  'vozol::Purple candy': 'vozol-purple-candy',
+  'vozol::Sour Apple Ice': 'vozol-sour-apple-ice',
+  'vozol::Strawberry Ice': 'vozol-strawberry-ice',
+  'vozol::Strawberry Ice cream': 'vozol-strawberry-ice-cream',
+  'vozol::Strawberry Kiwi': 'vozol-strawberry-kiwi',
+  'vozol::Strawberry Watermelon': 'vozol-strawberry-watermelon',
+  'vozol::Vanilla cream tobacco': 'vozol-vanilla-cream-tobacco',
+  'vozol::Watermelon Bubble Gum': 'vozol-watermelon-bubble-gum',
+  'vozol::Watermelon Ice': 'vozol-watermelon-ice',
+  'vozol::Watermelon Plum': 'vozol-watermelon-plum',
+  'vozol::White Peach Jasmine': 'vozol-white-peach-jasmine',
+  // elfliq
+  'elfliq::Apple Peach': 'elfliq-apple-peach',
+  'elfliq::Apple pear': 'elfliq-apple-pear',
+  'elfliq::Blackberry lemon': 'elfliq-blackberry-lemon',
+  'elfliq::Blackcurrant aniseed': 'elfliq-blackcurrant-aniseed',
+  'elfliq::Blackcurrant Menthol': 'elfliq-blackcurrant-menthol',
+  'elfliq::Blue raz ice': 'elfliq-blue-raz-ice',
+  'elfliq::Blue Razz Cherry': 'elfliq-blue-razz-cherry',
+  'elfliq::Blue razz lemonade': 'elfliq-blue-razz-lemonade',
+  'elfliq::Blueberry': 'elfliq-blueberry',
+  'elfliq::Blueberry Cherry Cranberry': 'elfliq-blueberry-cherry-cranberry',
+  'elfliq::Bluebery raspberry pomergranate': 'elfliq-bluebery-raspberry-pomergranate',
+  'elfliq::Bluebery rose mint': 'elfliq-bluebery-rose-mint',
+  'elfliq::Bluebery sour raspberry': 'elfliq-bluebery-sour-raspberry',
+  'elfliq::cherry': 'elfliq-cherry',
+  'elfliq::Cherry cola': 'elfliq-cherry-cola',
+  'elfliq::Cherry lemon peach': 'elfliq-cherry-lemon-peach',
+  'elfliq::Cherry Sour raspberry': 'elfliq-cherry-sour-raspberry',
+  'elfliq::Cola': 'elfliq-cola',
+  'elfliq::Cool mint': 'elfliq-cool-mint',
+  'elfliq::Double apple': 'elfliq-double-apple',
+  'elfliq::Elf jack': 'elfliq-elf-jack',
+  'elfliq::Elfbull ice': 'elfliq-elfbull-ice',
+  'elfliq::Fizzy Cherry': 'elfliq-fizzy-cherry',
+  'elfliq::Grape': 'elfliq-grape',
+  'elfliq::Grape cherry': 'elfliq-grape-cherry',
+  'elfliq::Green grape rose': 'elfliq-green-grape-rose',
+  'elfliq::Jasmine raspberry': 'elfliq-jasmine-raspberry',
+  'elfliq::Kiwi passion guava': 'elfliq-kiwi-passion-guava',
+  'elfliq::Lemon lime': 'elfliq-lemon-lime',
+  'elfliq::Lemon Sherbet': 'elfliq-lemon-sherbet',
+  'elfliq::Mango peach': 'elfliq-mango-peach',
+  'elfliq::Mr.Blue': 'elfliq-mr-blue',
+  'elfliq::Ocean Mint': 'elfliq-ocean-mint',
+  'elfliq::PB cloud': 'elfliq-pb-cloud',
+  'elfliq::Peach ice': 'elfliq-peach-ice',
+  'elfliq::Pina colada': 'elfliq-pina-colada',
+  'elfliq::Pineaple ice': 'elfliq-pineaple-ice',
+  'elfliq::Pineapple colada': 'elfliq-pineapple-colada',
+  'elfliq::Pink grapefruit': 'elfliq-pink-grapefruit',
+  'elfliq::Pink lemonade': 'elfliq-pink-lemonade',
+  'elfliq::Pink lemonade soda': 'elfliq-pink-lemonade-soda',
+  'elfliq::Raspberry lychee': 'elfliq-raspberry-lychee',
+  'elfliq::Rhubarb snoow': 'elfliq-rhubarb-snoow',
+  'elfliq::Snoow Tobacco': 'elfliq-snoow-tobacco',
+  'elfliq::Sour Apple': 'elfliq-sour-apple',
+  'elfliq::Sour watermelon gummy': 'elfliq-sour-watermelon-gummy',
+  'elfliq::SpearMint': 'elfliq-spearmint',
+  'elfliq::Strawberry banana': 'elfliq-strawberry-banana',
+  'elfliq::Strawberry chery lemon': 'elfliq-strawberry-chery-lemon',
+  'elfliq::Strawberry ice': 'elfliq-strawberry-ice',
+  'elfliq::Strawberry kiwi': 'elfliq-strawberry-kiwi',
+  'elfliq::Strawberry raspberry chery ice': 'elfliq-strawberry-raspberry-chery-ice',
+  'elfliq::Strawberry Razz Lemonade': 'elfliq-strawberry-razz-lemonade',
+  'elfliq::Strawberry snoow': 'elfliq-strawberry-snoow',
+  'elfliq::Strawberry Watermelon': 'elfliq-strawberry-watermelon',
+  'elfliq::Very Menthol': 'elfliq-very-menthol',
+  'elfliq::Watermelon': 'elfliq-watermelon',
+  'elfliq::Watermelon cherry': 'elfliq-watermelon-cherry',
+};
+
+const catalog = [
+  {
+    id: 'disposable',
+    name: 'Одноразки',
+    name_pl: 'E-papierosy',
+    icon: '',
+    img: 'images/cat-disposable.webp',
+    models: [
+      {
+        id: 'elfd3',
+        name: 'Elf Bar D3 25k',
+        img: 'images/model-d3.webp',
+        tiers: [[1,65],[3,60],[5,55],[10,50],[20,43],[50,40],[100,38]],
+        flavors: ['Alpine mint','Apple peach','Blackberry cranberry','Blackberry pomegrn cherry','Blue razz ice','Blueberry ice','Blueberry raspberry','Double apple','Grape cherry','Grape ice','Grape mint','Kiwi passion fruit guava','Kiwi pineapple ice','Lemon lime','Mango peach watermelon','Peach berry','Peach ice','Pineapple mango ice','Strawb raspberry cherry','Strawberry grape','Strawberry ice','Strawberry watermelon','Vmt','Watermelon bubblegum','Watermelon ice','Watermelon lemon']
+      },
+      {
+        id: 'elfmoon',
+        name: 'Elf Bar Moon 40K',
+        img: 'images/model-moon.webp',
+        flavors: ['Blue razz ice','Cherry Watermelon','Grape Ice','Grape Raspberry','Kiwi passion fruit guava','Lemon lime','Lime Cola','Mango Peach Watermelon','Miami mint','Peach ice','Pomegranate Burst','Watermelon Ice']
+      },
+      {
+        id: 'lushking',
+        name: 'Lush King 40k',
+        img: 'images/model-lush.webp',
+        flavors: ['Black Currant Pineapple','Black Grape Ice','Blue Razz Ice','Cactus Lime','Cherry Burst','Cucumber Lime','Milky Oolong','Mountain Mint','Pomegranate Burst','Sour Apple ice','Sour Pineapple Ice','Sour Strawberry Dragonfruit','Starfruit Grape','Tropical Mango','Watermelon ice']
+      },
+      {
+        id: 'elfbc45k',
+        name: 'Elf Bar BC 45k',
+        img: 'images/model-bc45k.webp',
+        flavors: ['Blackberry Lemonade','Blackcurrant Grape','Blue Razz Ice','Cherry Peach Soda','Double Mint','Grapefruit Green Tea','Kiwi Pineapple Peach','Lemon Lime','Pear Soda','Pomegranate Burst','Pomegranate Raspberry Lime','Red Raspberry Strawberry','Sour Apple Kiwi','Strawberry Grapefruit','Watermelon Ice']
+      },
+      {
+        id: 'maskking',
+        name: 'Maskking Extre 100k',
+        img: 'images/model-maskking.webp',
+        tiers: [[1,80],[3,75],[5,70],[10,65],[20,60],[50,50],[100,44]],
+        flavors: ['Alaska Ice','Banana Taffy Freeze','Black Ice Dragonfruit','Blue Razz Ice','Cheesecake','Frozen Pina Colada','Fruity Cool Strawberry','Grape Slush','Juicy Peach Ice','Mexico Mango','Miami Mint','Omg B Burst','Sour Apple Ice','Sour Triple Berry','Strawberry B-Burst','Strawberry Watermelon','Triple Cherry','Watermelon Ice','White Gummy Ice','Wild Cherry Slush','Zesty Grapefruit']
+      },
+      {
+        id: 'dojo',
+        name: 'Vaporesso Dojo Sphere 40k',
+        img: 'images/model-dojo.webp',
+        flavors: ['Blue Razz Ice','Blueberry Watermelon','Fcuking Fab','Frozen Banana','Georgia Peach','Hawaii Dream','Juicy Grape','Miami Mint','Pink Lemonade','Sour Gush','Strawberry banana','Strawberry Ice','Watermelon Ice','White Gummy']
+      }
+    ]
+  },
+  {
+    id: 'pods',
+    name: 'Под системы',
+    name_pl: 'Pody',
+    icon: '',
+    img: 'images/cat-pods.webp',
+    models: [
+      {
+        id: 'xrosmini',
+        name: 'XROS MINI 5',
+        img: 'images/xrosmini.png',
+        flavors: ['Pastel Crystal','Rose Red','Carbon Black','Purple','Titanium silver','Black','Flowing Blue','Flowing Green','Flowing Pink','Sky Blue']
+      },
+      {
+        id: 'oxva',
+        name: 'OXVA XLIM GO 2',
+        img: 'images/oxva.png',
+        flavors: ['Pink Ripple','Black Carbon','Metal Silver','Light Brown Shadow','Metal Blue','Black Shadow','Green Ripple','Blue Ripple']
+      }
+    ]
+  },
+  {
+    id: 'cartridges',
+    name: 'Картриджи',
+    name_pl: 'Cartridge',
+    icon: '',
+    img: 'images/cat-cartridges.webp',
+    models: [
+      {
+        id: 'cart-xros',
+        name: 'CARTRIDGE XROS 3 ML',
+        img: 'images/cartridge-xros.png',
+        desc: '0.4 Ω | 0.6 Ω | 0.8 Ω',
+        desc_pl: '0.4 Ω | 0.6 Ω | 0.8 Ω',
+        flavors: ['0.4 Ω','0.6 Ω','0.8 Ω']
+      },
+      {
+        id: 'cart-oxva',
+        name: 'CARTRIDGE OXVA 3 ML',
+        img: 'images/cartridge-oxva.png',
+        desc: '0.4 Ω | 0.6 Ω | 0.8 Ω',
+        desc_pl: '0.4 Ω | 0.6 Ω | 0.8 Ω',
+        flavors: ['0.4 Ω','0.6 Ω','0.8 Ω']
+      }
+    ]
+  },
+  {
+    id: 'liquids',
+    name: 'Жидкости',
+    name_pl: 'E-liquid',
+    icon: '',
+    img: 'images/cat-liquids.webp',
+    models: [
+      {
+        id: 'puffy',
+        name: 'PUFFY',
+        img: 'images/puffy.png',
+        flavors: ['Apple Grape Blueberry','Banana cherry','Berri kiwi','Berry Cherry Cocktail','Berry cherry cranberry','Black grape mint','Blackcurrant slush','Blue razz berry','Blueberry Pomegranate','Blueberry raspberry','Cherry Ice','Cider berries','Cola Orange','Cranberry Grape','Currant cherry','Energy Drink','Fall tea','Grape','Grape Melon','Grape Raspberry Black Plum','Gummy Bear','Ice latte','Ice mojito mint','Juicy nectar','Lemon grapefruit','Lemon Mint','Lemon Peach Passion','Lychee passion','Mixed berries','Peach Blueberry Ice','Pineapple coconut','Raspberry Watermelon','Red lemonade','Rose Milk','Sangria','Skittles Candy','Sour Strawberry','Strawberry dragon fruit','Strawberry Lime','Strawberry watermelon','Sweet Orange Grapefruit','Tropic punch','Tropical Fruits','Turbo Mint','Vitamin','Watermelon Bubble gum','Watermelon raspberry']
+      },
+      {
+        id: 'vozol',
+        name: 'VOZOL PRIME',
+        img: 'images/vozol.png',
+        flavors: ['Berry','Berry Peach','Blue Cotton Candy','Blue raspberry','Blueberry Ice','Blueberry Razz Lemon','Blueberry watermelon','Cherry Cola','Cherry lemon peach','Cherry Vanilla Cream','Cola Gummies','Dragon Fruit Banana Cherry','Frozen Grape Soda','Grape cherry','Grape Ice','Kiwi Passion Fruite Guava','LavaFire','Lemon Grapefruit','Lemon Lime','Love 777','Lychee Mint','Mint ice','Mixed Berries','Peach Ice','Peach Mango Watermelon','Perfume Lemon','Pineapple Passion Fruit Lime','Pomegranate lemonade','Purple candy','Sour Apple Ice','Strawberry Ice','Strawberry Ice cream','Strawberry Kiwi','Strawberry Watermelon','Vanilla cream tobacco','Watermelon Bubble Gum','Watermelon Ice','Watermelon Plum','White Peach Jasmine']
+      },
+      {
+        id: 'elfliq',
+        name: 'ELF LIQ',
+        img: 'images/elfliq.png',
+        flavors: ['Apple Peach','Apple pear','Blackberry lemon','Blackcurrant aniseed','Blackcurrant Menthol','Blue raz ice','Blue Razz Cherry','Blue razz lemonade','Blueberry','Blueberry Cherry Cranberry','Bluebery raspberry pomergranate','Bluebery rose mint','Bluebery sour raspberry','cherry','Cherry cola','Cherry lemon peach','Cherry Sour raspberry','Cola','Cool mint','Double apple','Elf jack','Elfbull ice','Fizzy Cherry','Grape','Grape cherry','Green grape rose','Jasmine raspberry','Kiwi passion guava','Lemon lime','Lemon Sherbet','Mango peach','Mr.Blue','Ocean Mint','PB cloud','Peach ice','Pina colada','Pineaple ice','Pineapple colada','Pink grapefruit','Pink lemonade','Pink lemonade soda','Raspberry lychee','Rhubarb snoow','Snoow Tobacco','Sour Apple','Sour watermelon gummy','SpearMint','Strawberry banana','Strawberry chery lemon','Strawberry ice','Strawberry kiwi','Strawberry raspberry chery ice','Strawberry Razz Lemonade','Strawberry snoow','Strawberry Watermelon','Very Menthol','Watermelon','Watermelon cherry']
+      }
+    ]
+  }
+];
+
+// ---------- цены ----------
+const fmt = p => p.toLocaleString('pl-PL') + ' zł';
+const todayStr = () => { const d = new Date(); return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0'); };
+const activeSale = id => { const d = todayStr(); return SALES.find(x => x.model === id && (!x.from || d >= x.from) && (!x.until || d <= x.until)) || null; };
+const baseTiersOf = (catId, m) => m?.tiers || PRICING[catId]?.tiers || [];
+function tiersOf(catId, m) {
+  const base = baseTiersOf(catId, m), s = m ? activeSale(m.id) : null;
+  if (!s) return base;
+  const below = s.below || Infinity;
+  return base.map(([q,p]) => q >= below ? [q,p] : [q, Math.max(0, s.percent ? Math.round(p*(1-s.percent/100)) : p-(s.off||0))]);
+}
+const modelMax = (cat, m) => { const x = baseTiersOf(cat.id, m); return x.length ? x[0][1] : 0; };
+catalog.forEach(cat => { cat.models = cat.models.map((m,i)=>({m,i})).sort((a,b)=>(modelMax(cat,b.m)-modelMax(cat,a.m))||(a.i-b.i)).map(x=>x.m); });
+const findModel = id => { for (const c of catalog) { const m = c.models.find(x => x.id === id); if (m) return { cat: c, m }; } return null; };
+function priceText(cat, m) {
+  const tt = tiersOf(cat.id, m); if (!tt.length) return '';
+  const hi = tt[0][1], lo = tt[tt.length-1][1];
+  return hi === lo ? `${hi} zł` : `${lo}–${hi} ${t('per_pcs')}`;
+}
+function priceHtml(cat, m) {
+  const txt = priceText(cat, m), s = activeSale(m.id); if (!s) return txt;
+  const o = baseTiersOf(cat.id, m), oh = o[0][1], ol = o[o.length-1][1], ot = oh === ol ? `${oh}` : `${ol}–${oh}`;
+  return `<s style="color:#8b8b96;font-weight:500">${ot}</s> ` + txt;
+}
+// ---------- корзина ----------
+let cart = {};
+try { cart = JSON.parse(localStorage.getItem('sh_cart') || '{}') || {}; } catch(e) { cart = {}; }
+const saveCart = () => { try { localStorage.setItem('sh_cart', JSON.stringify(cart)); } catch(e) {} };
+const cartCount = () => Object.values(cart).reduce((s,i)=>s+i.qty, 0);
+const pricingQty = () => Object.values(cart).reduce((s,i)=> (i.catId==='pods'||i.catId==='cartridges') ? s : s+i.qty, 0);
+function unitPrice(item, total) {
+  const f = findModel(item.model); if (!f) return 0;
+  const tt = tiersOf(f.cat.id, f.m);
+  if (f.cat.id === 'pods' || f.cat.id === 'cartridges') return tt[0]?.[1] || 0;
+  let p = tt[0]?.[1] || 0; for (const [q,u] of tt) if (total >= q) p = u; return p;
+}
+const totalAt = T_ => Object.values(cart).reduce((s,i)=>s+i.qty*unitPrice(i,T_), 0);
+const cartTotal = () => totalAt(pricingQty());
+function cartSavings() {
+  const T_ = pricingQty(); let s = 0;
+  Object.values(cart).forEach(i => { const f = findModel(i.model); if (!f || f.cat.id==='pods' || f.cat.id==='cartridges') return; s += i.qty*((baseTiersOf(f.cat.id,f.m)[0]?.[1]||0) - unitPrice(i,T_)); });
+  return s;
+}
+const deliveryCost = () => cartTotal() >= 2500 ? 40 : 25;
+function upsell() {
+  const T_ = pricingQty(); if (!T_) return '';
+  let next = Infinity;
+  Object.values(cart).forEach(i => { const f = findModel(i.model); if (!f || f.cat.id==='pods'||f.cat.id==='cartridges') return; tiersOf(f.cat.id,f.m).forEach(([q]) => { if (q > T_ && q < next) next = q; }); });
+  if (next === Infinity || next > 200) return '';
+  const save = totalAt(T_) - totalAt(next);
+  const items = Object.values(cart).filter(i => { const f = findModel(i.model); return f && f.cat.id!=='pods' && f.cat.id!=='cartridges'; });
+  const price = items.length ? unitPrice(items[0], next) : 0;
+  return save > 0 ? `<div class="up">${t('upsell', next - T_, price, save)}</div>` : '';
+}
+// ---------- склад ----------
+let stockCache = {};
+async function loadStock(model) {
+  const skus = model.flavors.map(f => SKU_MAP[model.id + '::' + f]).filter(Boolean); if (!skus.length) return;
+  try {
+    const r = await fetch(`${PROXY_URL}/stock-bulk?skus=${encodeURIComponent(skus.join(','))}`), d = await r.json();
+    Object.assign(stockCache, d.results || {});
+    if (route().page === 'model') renderPage();
+  } catch(e) {}
+}
+const stockOf = key => { const sku = SKU_MAP[key]; return sku && (sku in stockCache) ? stockCache[sku] : null; };
+function nameOf(sku) { const it = Object.values(cart).find(i => SKU_MAP[i.key] === sku); return it ? `${it.modelName} ${it.flavor}` : sku; }
+async function checkStock() {
+  const need = {}; Object.values(cart).forEach(i => { const s = SKU_MAP[i.key]; if (s) need[s] = (need[s]||0) + i.qty; });
+  const skus = Object.keys(need); if (!skus.length) return { ok: true };
+  try {
+    const r = await fetch(`${PROXY_URL}/stock-bulk?skus=${encodeURIComponent(skus.join(','))}`), d = await r.json();
+    if (!r.ok || !d.results) return { ok:false, message:t('stock_connection_error') };
+    for (const s of skus) if ((d.results[s] ?? 0) < need[s]) return { ok:false, message:t('stock_checkout_error', nameOf(s)) };
+    return { ok: true };
+  } catch(e) { return { ok:false, message:t('stock_connection_error') }; }
+}
+async function createOrder() {
+  const T_ = pricingQty();
+  const products = Object.values(cart).filter(i => SKU_MAP[i.key]).map(i => ({ name:`${i.modelName} ${i.flavor}`, sku:SKU_MAP[i.key], quantity:i.qty, price:unitPrice(i,T_) }));
+  if (!products.length) return { ok: true };
+  try {
+    const r = await fetch(`${PROXY_URL}/order`, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ buyer: pending.buyer, shipping: pending.shipping, products, campaign: getCampaign(), uid: getUid() }) });
+    const d = await r.json();
+    if (!r.ok) return { ok:false, message: d.error === 'insufficient_stock' ? t('stock_checkout_error', nameOf(d.sku)) : t('stock_order_failed') };
+    return { ok: true };
+  } catch(e) { return { ok:false, message:t('stock_connection_error') }; }
+}
+// ---------- статистика ----------
+function readCampaign() { try { const q = new URLSearchParams(location.search); const p = q.get('c') || q.get('utm_campaign') || q.get('campaign') || ''; return /^[A-Za-z0-9_-]{1,64}$/.test(p) ? p : ''; } catch(e) { return ''; } }
+const SESSION_CAMPAIGN = readCampaign(), FROM_MAILING = SESSION_CAMPAIGN === 'mailing';
+if (SESSION_CAMPAIGN && !FROM_MAILING) { try { localStorage.setItem('sh_campaign', SESSION_CAMPAIGN + '|' + Date.now()); } catch(e) {} }
+function getCampaign() {
+  if (SESSION_CAMPAIGN && !FROM_MAILING) return SESSION_CAMPAIGN;
+  try { const [c, ts] = (localStorage.getItem('sh_campaign') || '').split('|'); if (c && Date.now() - Number(ts) < 2592000000) return c; } catch(e) {}
+  return 'direct';
+}
+let _mu = null;
+function getUid() { try { let u = localStorage.getItem('sh_uid'); if (!u) { u = 'w' + Math.random().toString(36).slice(2,10) + Date.now().toString(36); localStorage.setItem('sh_uid', u); } return u; } catch(e) { return _mu || (_mu = 'm' + Math.random().toString(36).slice(2,10)); } }
+const ageOk = () => { try { return localStorage.getItem('sh_age18') === '1'; } catch(e) { return _ageMem; } }; let _ageMem = false;
+function track(event, extra) {
+  if (IS_DRAFT || IS_BOT || FROM_MAILING || !ageOk()) return;
+  try { fetch(`${PROXY_URL}/track`, { method:'POST', headers:{'Content-Type':'text/plain;charset=UTF-8'}, body: JSON.stringify({ event, campaign: getCampaign(), uid: getUid(), meta: JSON.stringify(Object.assign({ src:'web' }, extra || {})).slice(0,300) }), keepalive:true }).catch(()=>{}); } catch(e) {}
+}
+// ---------- иконки ----------
+const IC = {cart:'<path d="M3 4h2l2.4 11.2a1 1 0 0 0 1 .8h8.6a1 1 0 0 0 1-.8L20 8H6"/><circle cx="9" cy="20" r="1.2"/><circle cx="17" cy="20" r="1.2"/>',menu:'<path d="M4 7h16M4 12h16M4 17h16"/>',tag:'<path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8.5" r="1"/>',wallet:'<path d="M3 7a2 2 0 0 1 2-2h13v4"/><path d="M3 7v11a2 2 0 0 0 2 2h15V9H5a2 2 0 0 1-2-2z"/><circle cx="16.5" cy="14.5" r="1"/>',truck:'<path d="M2 6h12v10H2zM14 10h4l3 3v3h-7"/><circle cx="6.5" cy="17.5" r="1.8"/><circle cx="17.5" cy="17.5" r="1.8"/>',swap:'<path d="M4 8h14l-3-3M20 16H6l3 3"/>',tg:'<path d="M21 4 3 11l6 2 2 6 3-4 5 4z"/>',user:'<path d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM4 21a8 8 0 0 1 16 0"/>',arrow:'<path d="M5 12h14M13 6l6 6-6 6"/>',minus:'<path d="M6 12h12"/>',plus:'<path d="M12 6v12M6 12h12"/>',search:'<path d="M11 4a7 7 0 1 0 0 14 7 7 0 0 0 0-14zM21 21l-4-4"/>',check:'<path d="M5 12l5 5 9-10"/>',x:'<path d="M6 6l12 12M18 6L6 18"/>'};
+const ico = (k, st='') => `<svg viewBox="0 0 24 24" ${st?`style="${st}"`:''}>${IC[k]}</svg>`;
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const imgTag = (src, alt='') => `<img src="${src}" alt="${esc(alt)}" loading="lazy" onerror="this.style.visibility='hidden'">`;
+// ---------- маршрутизация ----------
+function route() {
+  const h = (location.hash || '#/').replace(/^#\/?/, ''), p = h.split('/');
+  return { page: p[0] || 'home', a: decodeURIComponent(p[1] || ''), b: p[2] || '' };
+}
+const go = h => { location.hash = h; };
+let pending = null, orderCreated = false, busy = false, payMethod = 'cod', delivery = 'paczkomat', flavorFilter = '';
+const form = {};   // значения полей формы
+// ---------- шаблоны ----------
+function header(r) {
+  const on = k => r.page === k ? 'on' : '';
+  return `<header><div class="wrap hd"><a class="logo" href="#/"><i style="background:none">${imgTag('images/logo-icon.webp')}</i>Snitch Shop</a>
+  <nav><a class="${r.page==='home'||r.page==='cat'||r.page==='model'?'on':''}" href="#/">${t('nav_catalog')}</a><a class="${on('info')}" href="#/info/d">${t('nav_delivery')}</a><a href="#/info/p">${t('nav_payment')}</a><a href="#/info/z">${t('nav_returns')}</a><a href="https://t.me/${MANAGER_USERNAME}" target="_blank" rel="noopener" data-act="mgr">${t('nav_contact')}</a></nav><div class="sp"></div>
+  <a class="btn l" data-act="lang">${lang==='pl'?'PL · RU':'RU · PL'}</a><a class="btn p" href="#/cart">${ico('cart')}<span>${t('cart')}</span><span class="cnt">${cartCount()}</span></a><a class="btn burger" data-act="menu" aria-label="Menu">${ico('menu')}</a></div>
+  <div class="mmenu" id="mmenu"><a href="#/">${t('nav_catalog')}</a><a href="#/info/d">${t('nav_delivery')}</a><a href="#/info/p">${t('nav_payment')}</a><a href="#/info/z">${t('nav_returns')}</a><a href="https://t.me/${MANAGER_USERNAME}" target="_blank" rel="noopener">${t('nav_contact')}</a><a data-act="lang">${t('lang_btn')}</a></div></header>`;
+}
+function footer() {
+  const tg = BOT_USERNAME ? `<a href="https://t.me/${BOT_USERNAME}/app" target="_blank" rel="noopener" data-act="tgapp">${t('open_tg')}</a>` : '';
+  return `<footer><div class="wrap"><div class="fgrid"><div><b>Snitch Shop</b>${t('foot_about')}</div><div><b>${t('foot_info')}</b><a href="#/info/d">${t('nav_delivery')}</a><a href="#/info/p">${t('nav_payment')}</a><a href="#/info/z">${t('nav_returns')}</a></div><div><b>${t('foot_contact')}</b>${tg}<a href="https://t.me/${MANAGER_USERNAME}" target="_blank" rel="noopener" data-act="mgr">@${MANAGER_USERNAME}</a></div></div><div class="age">${t('foot_age')}</div></div></footer>`;
+}
+const cartBar = r => (cartCount() && r.page !== 'cart' && r.page !== 'order' && r.page !== 'done') ? `<a class="cartbar" href="#/cart"><span style="display:flex;gap:10px;align-items:center">${ico('cart')}${cartCount()} ${t('pcs')}</span><span>${fmt(cartTotal())}</span></a>` : '';
+const crumb = (...a) => '<div class="crumb">' + a.map((x,i) => i === a.length-1 ? `<b style="color:var(--text)">${x}</b>` : x).join(` ${ico('arrow','width:14px;height:14px')} `) + '</div>';
+function modelCard(cat, m) {
+  const sale = activeSale(m.id);
+  return `<a class="card m" href="#/model/${m.id}">${sale?`<span class="badge">${t('sale')}</span>`:''}<div class="ph">${imgTag(m.img, m.name)}</div><b>${esc(m.name)}</b><div class="price">${priceHtml(cat, m)}</div></a>`;
+}
+function home() {
+  const perks = [['tag','perk1','perk1s'],['wallet','perk2','perk2s'],['truck','perk3','perk3s'],['swap','perk4','perk4s']].map(([i,a,b]) => `<div class="card perk">${ico(i)}<div><b>${t(a)}</b><span>${t(b)}</span></div></div>`).join('');
+  const cats = catalog.map(c => `<a class="card cat" href="#/cat/${c.id}"><div class="ph">${imgTag(c.img, catName(c))}</div><div class="t"><div>${catName(c)}<small>${c.models.length} ${t('models_n', c.models.length)}</small></div>${ico('arrow')}</div></a>`).join('');
+  const all = catalog.map(c => `<div class="sechead"><h3 style="margin:18px 0 12px;color:var(--text2);font-size:15px;font-weight:600;text-transform:uppercase;letter-spacing:.5px">${catName(c)}</h3></div><div class="models">${c.models.map(m => modelCard(c, m)).join('')}</div>`).join('');
+  const steps = [['s1','s1s'],['s2','s2s'],['s3','s3s']].map(([a,b],i) => `<div class="card step"><span>${i+1}</span><b>${t(a)}</b><p>${t(b)}</p></div>`).join('');
+  const tgBtn = BOT_USERNAME ? `<a class="btn p" href="https://t.me/${BOT_USERNAME}/app" target="_blank" rel="noopener" data-act="tgapp">${t('open_tg')}</a>` : `<span class="chip">@${MANAGER_USERNAME}</span>`;
+  return `<div class="wrap"><section class="hero"><div><h1>${t('hero_h')}</h1><p>${t('hero_p')}</p><div class="acts"><a class="btn p lg" href="#catalog" data-act="scroll">${t('open_catalog')} ${ico('arrow')}</a>${BOT_USERNAME?`<a class="btn lg" href="https://t.me/${BOT_USERNAME}/app" target="_blank" rel="noopener" data-act="tgapp">${ico('tg')} ${t('mini_app')}</a>`:''}</div><div class="chips"><span class="chip">${t('chip1')}</span><span class="chip">${t('chip2')}</span><span class="chip">Paczkomat · Żabka · Kurier</span></div></div><div class="ban"><img src="images/banner-oferta.png" alt="Super oferta"></div></section>
+  <div class="perks">${perks}</div><section class="sec" id="catalog"><h2>${t('categories')}</h2><div class="cats">${cats}</div></section><section class="sec"><h2>${t('all_models')}</h2>${all}</section><section class="sec"><h2>${t('how')}</h2><div class="steps">${steps}</div></section>
+  <section class="sec"><div class="tg"><div class="card tgc"><div class="ico">${ico('tg')}</div><div><b>${t('tgapp')}</b><p>${t('tgapp_s')}</p>${tgBtn}</div></div><div class="card tgc"><div class="ico">${ico('user')}</div><div><b>${t('manager')}</b><p>${t('manager_s')}</p><a class="btn" href="https://t.me/${MANAGER_USERNAME}" target="_blank" rel="noopener" data-act="mgr">@${MANAGER_USERNAME}</a></div></div></div></section></div>`;
+}
+function catPage(id) {
+  const c = catalog.find(x => x.id === id); if (!c) return notFound();
+  const rows = c.models.map(m => `<a class="card row" href="#/model/${m.id}"><div class="th">${imgTag(m.img, m.name)}</div><div class="nm"><b>${esc(m.name)}</b><small>${m.desc ? esc(lang==='pl'&&m.desc_pl?m.desc_pl:m.desc) : m.flavors.length+' '+t('flavors_n', m.flavors.length)}</small></div><div class="price" style="text-align:right">${priceHtml(c, m)}</div>${ico('arrow')}</a>`).join('');
+  return `<div class="wrap">${crumb(`<a href="#/">${t('home')}</a>`, catName(c))}<div class="pg" style="padding-top:0"><h1>${catName(c)}</h1><div class="sub">${t('pick_model')} — ${c.models.length} ${t('models_n', c.models.length)}</div><div class="mgrid" style="display:grid;grid-template-columns:1fr 1fr;gap:0 14px">${rows}</div></div></div>`;
+}
+function modelPage(id) {
+  const f = findModel(id); if (!f) return notFound(); const { cat, m } = f;
+  const sale = activeSale(m.id), tt = tiersOf(cat.id, m), bt = baseTiersOf(cat.id, m), T_ = pricingQty();
+  const cur = (() => { let p = tt[0][1]; for (const [q] of tt) if (T_ >= q) p = q; return T_ ? p : -1; })();
+  const rows = tt.map(([q, p], i) => { const nx = tt[i+1]?.[0], lab = i === tt.length-1 ? `${q}+` : (nx-1 === q ? `${q}` : `${q}–${nx-1}`); const on = q === cur;
+    return `<tr class="${on?'now':''}"><td>${lab} ${t('pcs')}</td><td>${bt[i][1] !== p ? `<s style="color:#8b8b96">${bt[i][1]}</s> ` : ''}${p} zł</td><td>${on?t('your_level'):''}</td></tr>`; }).join('');
+  const fixed = tt.length === 1;
+  const q = flavorFilter.trim().toLowerCase();
+  const fl = m.flavors.filter(x => !q || x.toLowerCase().includes(q)).map(name => {
+    const key = m.id + '::' + name, qty = cart[key]?.qty || 0, st = stockOf(key), out = st !== null && st <= 0;
+    return `<div class="card f ${qty?'has':''} ${out?'out':''}"><div><span>${esc(name)}</span>${out?`<small>${t('out')}</small>`:''}</div><div class="q ${out?'dis':''}"><button data-act="dec" data-key="${esc(key)}" aria-label="−">${ico('minus')}</button><em>${out?'–':qty}</em><button data-act="inc" data-key="${esc(key)}" aria-label="+">${ico('plus')}</button></div></div>`; }).join('');
+  return `<div class="wrap">${crumb(`<a href="#/">${t('home')}</a>`, `<a href="#/cat/${cat.id}">${catName(cat)}</a>`, esc(m.name))}<div class="layout"><aside class="side"><div class="ph">${imgTag(m.img, m.name)}</div><h1>${esc(m.name)}</h1><div class="price">${priceHtml(cat, m)}</div>
+  ${fixed ? '' : `<div class="card"><table><tr><th colspan="3">${t('smart')}${sale?` · ${t('sale')}`:''}</th></tr>${rows}</table></div>`}</aside>
+  <main><div class="card search">${ico('search')}<input id="flt" value="${esc(flavorFilter)}" placeholder="${t('search')}" autocomplete="off"></div><div class="fl">${fl}</div></main></div></div>`;
+}
+function cartPage() {
+  const items = Object.entries(cart).filter(([,i]) => i.qty > 0);
+  if (!items.length) return `<div class="wrap"><div class="center"><h1>${t('cart_empty')}</h1><p>${t('cart_empty_sub')}</p><a class="btn p lg" href="#/">${t('open_catalog')}</a></div></div>`;
+  const T_ = pricingQty();
+  const rows = items.map(([key, i]) => { const f = findModel(i.model); return `<div class="card row"><div class="th">${imgTag(f?.m.img || '', i.modelName)}</div><div class="nm"><b>${esc(i.modelName)}</b><small>${esc(i.flavor)}</small></div><div class="q"><button data-act="dec" data-key="${esc(key)}">${ico('minus')}</button><em>${i.qty}</em><button data-act="inc" data-key="${esc(key)}">${ico('plus')}</button></div><div class="sm">${fmt(i.qty*unitPrice(i,T_))}</div></div>`; }).join('');
+  const sv = cartSavings();
+  return `<div class="wrap pg"><h1>${t('cart_title')}</h1><div class="sub">${items.length} ${t('pos_in_cart')}</div><div class="two"><div>${rows}<a class="btn" href="#/" style="margin-top:6px">${ico('plus')} ${t('add_more')}</a></div>
+  <aside class="card sum"><div class="l"><span>${t('positions')}</span><b>${items.length}</b></div>${sv>0?`<div class="l"><span>${t('discount')}</span><b style="color:#4ade80">−${fmt(sv)}</b></div>`:''}${upsell()}<div class="tot"><span>${t('total')}</span><span>${fmt(cartTotal())}</span></div><a class="btn p lg" href="#/order" data-act="checkout" style="width:100%;margin-top:16px">${t('checkout')} ${ico('arrow')}</a></aside></div></div>`;
+}
+const field = (id, label, ph='', hint='', type='text', mode='') => `<label for="${id}">${label}</label><input class="in" id="${id}" type="${type}" ${mode?`inputmode="${mode}"`:''} placeholder="${esc(ph)}" value="${esc(form[id] || '')}" autocomplete="off">${hint?`<div class="hint">${hint}</div>`:''}`;
+function orderPage() {
+  if (!cartCount()) return cartPage();
+  const lines = Object.values(cart).filter(i => i.qty > 0).map(i => `<div class="l"><span>${esc(i.modelName)} · ${esc(i.flavor)}</span><b>× ${i.qty}</b></div>`).join('');
+  const sv = cartSavings(), total = cartTotal(), dc = deliveryCost();
+  const dl = { paczkomat: field('f-kodpacz', t('lbl_kodpacz'), 'WAW123M', t('paczkomat_hint')), zabka: field('f-zabka', t('lbl_zabka'), '', t('zabka_hint')),
+    kurier: field('f-kod', t('lbl_zip'), '00-001', '', 'text', 'numeric') + field('f-ulica', t('lbl_street')) + field('f-budynek', t('lbl_building'), '10') + field('f-lokal', t('lbl_flat'), t('lbl_flat_ph')) }[delivery];
+  const body = payMethod === 'crypto' ? `<p class="sub" style="margin-top:14px">${t('crypto_hint')}</p>` :
+   `<h3>${t('recipient')}</h3>${field('f-name', t('lbl_name'), '', '', 'text')}${field('f-phone', t('lbl_phone'), '+48 600 123 456', t('phone_hint'), 'tel', 'tel')}${field('f-miasto', t('lbl_city'))}
+    <h3 style="margin-top:22px">${t('delivery_section')}</h3><div class="seg" style="grid-template-columns:1fr 1fr 1fr">${['paczkomat','zabka','kurier'].map(d => `<div class="${delivery===d?'on':''}" data-act="deliv" data-v="${d}" role="button" tabindex="0">${t('d_'+d)}</div>`).join('')}</div>${dl}`;
+  return `<div class="wrap pg"><h1>${t('order_title')}</h1><div class="sub">${payMethod==='crypto'?t('pay_crypto'):t('pay_cod')}</div><div class="two"><div class="card fm"><h3>${t('pay_section')}</h3><div class="seg"><div class="${payMethod==='cod'?'on':''}" data-act="pay" data-v="cod" role="button" tabindex="0">${t('pay_cod')}</div><div class="${payMethod==='crypto'?'on':''}" data-act="pay" data-v="crypto" role="button" tabindex="0">${t('pay_crypto')}</div></div>${body}</div>
+  <aside class="card sum"><b>${t('your_order')}</b><div style="margin-top:10px">${lines}</div>${sv>0?`<div class="l"><span>${t('saving')}</span><b style="color:#4ade80">${fmt(sv)}</b></div>`:''}<div class="l"><span>${t('delivery_cost')}</span><b>${fmt(dc)}</b></div><div class="tot"><span>${t('total_to_pay')}</span><span>${fmt(total + dc)}</span></div><a class="btn p lg" data-act="confirm" style="width:100%;margin-top:16px">${t('confirm')}</a></aside></div></div>`;
+}
+function donePage() {
+  if (!pending) return cartPage();
+  return `<div class="wrap"><div class="center"><div class="ok">${ico('check')}</div><h1>${t('done_h')}</h1><p>${pending.pay==='crypto'?t('done_crypto'):t('done_cod')}</p>
+  <div class="card sum" style="position:static;text-align:left;margin-bottom:20px"><div class="l"><span>${t('pay')}</span><b>${pending.pay==='crypto'?t('pay_crypto'):t('pay_cod')}</b></div>${pending.deliveryLabel?`<div class="l"><span>${t('delivery')}</span><b>${esc(pending.deliveryLabel)}</b></div>`:''}<div class="tot"><span>${t('total_to_pay')}</span><span>${fmt(pending.total)}</span></div></div>
+  <a class="btn p lg" id="mgr-link" href="${pending.link}" data-act="send" style="width:100%">${ico('tg')} ${t('write_manager')}</a><a class="btn lg" data-act="neworder" style="width:100%;margin-top:10px">${t('new_order')}</a></div></div>`;
+}
+function infoPage() {
+  const meth = a => '<div class="meth">' + a.map(x => `<span class="chip">${x}</span>`).join('') + '</div>';
+  return `<div class="wrap pg"><h1>${t('info_h')}</h1><div class="sub">${t('info_s')}</div><div class="info"><div class="card" id="sec-d"><h3>${ico('truck')}${t('nav_delivery')}</h3><p>${t('i_paczkomat')}</p><p>${t('i_zabka')}</p><p>${t('i_kurier')}</p></div>
+  <div class="card" id="sec-p"><h3>${ico('wallet')}${t('nav_payment')}</h3><p>${t('i_pay_courier')}</p>${meth([lang==='pl'?'Gotówka':'Наличные','BLIK','Apple Pay','Google Pay'])}<p>${t('i_pay_pickup')}</p>${meth(['BLIK','Apple Pay','Google Pay'])}<p>${t('i_pay_crypto')}</p>${meth(['BTC','ETH','USDT (TRC-20)'])}</div>
+  <div class="card" id="sec-z"><h3>${ico('swap')}${t('nav_returns')}</h3><p>${t('i_ret1')}</p><p>${t('i_ret2')}</p><a class="btn p" href="https://t.me/${MANAGER_USERNAME}" target="_blank" rel="noopener" data-act="mgr" style="margin-top:6px">${ico('tg')} @${MANAGER_USERNAME}</a></div></div></div>`;
+}
+const notFound = () => `<div class="wrap"><div class="center"><h1>404</h1><p></p><a class="btn p lg" href="#/">${t('home')}</a></div></div>`;
+// ---------- отрисовка ----------
+function renderPage() {
+  const r = route(), app = document.getElementById('app');
+  const focusId = document.activeElement && document.activeElement.id, selStart = document.activeElement?.selectionStart;
+  let body;
+  switch (r.page) {
+    case 'cat': body = catPage(r.a); break;
+    case 'model': body = modelPage(r.a); break;
+    case 'cart': body = cartPage(); break;
+    case 'order': body = orderPage(); break;
+    case 'done': body = donePage(); break;
+    case 'info': body = infoPage(); break;
+    default: body = home();
+  }
+  app.innerHTML = header(r) + body + footer() + cartBar(r);
+  if (focusId) { const el = document.getElementById(focusId); if (el) { el.focus(); try { el.setSelectionRange(selStart, selStart); } catch(e) {} } }
+}
+let lastKey = '';
+function onRoute() {
+  const r = route(), k = r.page + '/' + r.a;
+  if (r.page === 'model') { const f = findModel(r.a); if (f) { flavorFilter = k === lastKey ? flavorFilter : ''; loadStock(f.m); } }
+  if (r.page === 'cart' && k !== lastKey) track('cart_open');
+  if (r.page === 'order' && k !== lastKey) track('checkout_start');
+  renderPage();
+  if (k !== lastKey) { if (r.page === 'info' && r.a) { const el = document.getElementById('sec-' + r.a); if (el) el.scrollIntoView({ block: 'start' }); else window.scrollTo(0, 0); } else window.scrollTo(0, 0); }
+  lastKey = k;
+}
+// ---------- модалка ----------
+function showModal(msg) { const m = document.getElementById('modal'); m.innerHTML = `<div class="dlg card"><p style="color:var(--text);margin:6px 0 18px;font-size:16px">${msg}</p><a class="btn p lg" data-act="mclose">${t('ok')}</a></div>`; m.className = 'ov'; }
+const closeModal = () => { document.getElementById('modal').className = 'ov hidden'; };
+// ---------- возраст и язык ----------
+function showGate() {
+  const g = document.getElementById('gate'); if (ageOk() && hasLangOrChosen()) { g.className = 'ov hidden'; return; }
+  g.className = 'ov';
+  g.innerHTML = `<div class="dlg card"><div class="logo" style="justify-content:center;font-size:22px;margin-bottom:6px"><i style="background:none">${imgTag('images/logo-icon.webp')}</i>Snitch Shop</div>
+  <div class="lg2"><div class="${lang==='pl'?'sel':''}" data-act="setlang" data-v="pl" role="button" tabindex="0">Polski</div><div class="${lang==='ru'?'sel':''}" data-act="setlang" data-v="ru" role="button" tabindex="0">Русский</div></div>
+  <h2>${t('age_title')}</h2><p>${t('age_text')}</p><a class="btn p lg" data-act="ageyes">${t('age_yes')}</a><a class="btn lg" data-act="ageno">${t('age_no')}</a></div>`;
+}
+let _langChosen = hasLang; const hasLangOrChosen = () => _langChosen;
+function setLang(l) { lang = l; _langChosen = true; try { localStorage.setItem('vl_lang', l); } catch(e) {} document.documentElement.lang = l; }
+// ---------- действия ----------
+function setQty(key, d) {
+  const [mid, ...rest] = key.split('::'), flavor = rest.join('::'), f = findModel(mid); if (!f) return;
+  const cur = cart[key]?.qty || 0, next = Math.max(0, cur + d);
+  if (d > 0) {
+    if (cartCount() + d > 200) { showModal(t('max_limit')); return; }
+    const st = stockOf(key); if (st !== null) { if (st <= 0) { showModal(t('stock_limit_zero')); return; } if (next > st) { showModal(t('stock_limit_partial')); return; } }
+  }
+  if (next === 0) delete cart[key]; else cart[key] = { key, flavor, model: mid, modelName: f.m.name, category: catName(f.cat), catId: f.cat.id, qty: next };
+  if (d > 0) track('add_to_cart', { m: mid, f: flavor });
+  saveCart(); renderPage();
+}
+const val = id => (document.getElementById(id)?.value || '').trim();
+function saveForm() { document.querySelectorAll('.fm input').forEach(el => { form[el.id] = el.value; }); }
+async function confirmOrder() {
+  saveForm();
+  const total = cartTotal(), dc = deliveryCost(), count = cartCount();
+  const lines = {}; Object.values(cart).forEach(i => { (lines[i.modelName] = lines[i.modelName] || []).push(i); });
+  let ol = ''; Object.entries(lines).forEach(([m, its]) => { ol += m + '\n'; its.forEach(i => { ol += `${i.flavor} x${i.qty}\n`; }); ol += '\n'; });
+  let msg = `${T.pl.msg_greeting}\n\n`, buyer, shipping = {}, deliveryLabel = '';
+  if (payMethod === 'crypto') {
+    buyer = { full_name: 'Криптовалюта — ожидает данные от менеджера', phone: '' };
+    msg += `Kryptowaluta\nZAMÓWIENIE\n\n${ol}TOTAL: ${count} sztuk\nCENA: ${total} Zł\n\nCena dostawy: ${dc} Zł\nRazem do zapłaty: ${total}+${dc}=${total+dc} Zł`;
+  } else {
+    const name = val('f-name'), phoneRaw = val('f-phone'), city = val('f-miasto'), digits = phoneRaw.replace(/\D/g, '');
+    if (!name || !phoneRaw || !city) { showModal(t('fill_required')); return; }
+    if (digits.length < 9) { showModal(t('fill_phone')); return; }
+    const phone = '+48 ' + digits.replace(/^48/, '').slice(-9).replace(/(\d{3})(\d{3})(\d{3})/, '$1 $2 $3');
+    let dl = '';
+    if (delivery === 'paczkomat') { const k = val('f-kodpacz'); if (!k || !/[a-zA-Z]/.test(k)) { showModal(t('fill_kod')); return; } dl = `Dostawa: Paczkomat InPost\nMiasto: ${city}\nKod paczkomatu: ${k}\n`; deliveryLabel = 'Paczkomat InPost · ' + k; }
+    else if (delivery === 'zabka') { const z = val('f-zabka'); if (!z) { showModal(t('fill_zabka')); return; } dl = `Dostawa: Żabka\nMiasto: ${city}\nSklep Żabka / kod punktu: ${z}\n`; deliveryLabel = 'Żabka · ' + z; }
+    else { const k = val('f-kod'), u = val('f-ulica'), b = val('f-budynek'), l = val('f-lokal'); if (!k || !u || !b) { showModal(t('fill_required')); return; } dl = `Dostawa: Kurier\nMiasto: ${city}\nKod pocztowy: ${k}\nUlica: ${u} ${b}${l ? ' / ' + l : ''}\n`; deliveryLabel = 'Kurier · ' + u + ' ' + b; }
+    buyer = { full_name: name, phone }; shipping = { shipping_address_city: city };
+    msg += `Pobranie\nZAMÓWIENIE\n\n${ol}TOTAL: ${count} sztuk\nCENA: ${total} Zł\n\nImię i Nazwisko: ${name}\nTelefon: ${phone}\n${dl}\nCena dostawy: ${dc} Zł\nRazem do zapłaty: ${total}+${dc}=${total+dc} Zł`;
+  }
+  const btn = document.querySelector('[data-act="confirm"]'); if (btn) btn.style.opacity = .6;
+  const sc = await checkStock(); if (btn) btn.style.opacity = 1;
+  if (!sc.ok) { showModal(sc.message); return; }
+  pending = { buyer, shipping, pay: payMethod, total: total + dc, deliveryLabel, link: `https://t.me/${MANAGER_USERNAME}?text=${encodeURIComponent(msg)}` };
+  orderCreated = false; go('#/done');
+}
+async function sendToManager(ev) {
+  track('manager_click', { src: 'order' });
+  if (orderCreated || !pending) return;
+  ev.preventDefault(); if (busy) return; busy = true;
+  const url = pending.link, r = await createOrder(); busy = false;
+  if (!r.ok) { showModal(r.message); return; }
+  orderCreated = true; track('order_submitted', { pay: pending.pay, total: cartTotal() });
+  location.href = url;
+}
+document.addEventListener('click', ev => {
+  const el = ev.target.closest('[data-act]'); if (!el) { if (!ev.target.closest('header')) document.getElementById('mmenu')?.classList.remove('open'); return; }
+  const a = el.dataset.act;
+  if (a === 'inc') setQty(el.dataset.key, 1);
+  else if (a === 'dec') setQty(el.dataset.key, -1);
+  else if (a === 'lang') { setLang(lang === 'pl' ? 'ru' : 'pl'); renderPage(); }
+  else if (a === 'setlang') { setLang(el.dataset.v); showGate(); renderPage(); }
+  else if (a === 'menu') document.getElementById('mmenu').classList.toggle('open');
+  else if (a === 'scroll') { ev.preventDefault(); document.getElementById('catalog')?.scrollIntoView({ behavior: 'smooth' }); }
+  else if (a === 'pay') { saveForm(); payMethod = el.dataset.v; renderPage(); }
+  else if (a === 'deliv') { saveForm(); delivery = el.dataset.v; renderPage(); }
+  else if (a === 'confirm') confirmOrder();
+  else if (a === 'send') sendToManager(ev);
+  else if (a === 'neworder') { cart = {}; saveCart(); pending = null; orderCreated = false; Object.keys(form).forEach(k => delete form[k]); go('#/'); }
+  else if (a === 'mclose') closeModal();
+  else if (a === 'mgr') track('manager_click', { src: 'site' });
+  else if (a === 'tgapp') track('tgapp_click', { src: 'site' });
+  else if (a === 'ageyes') { setLang(lang); try { localStorage.setItem('sh_age18', '1'); } catch(e) { _ageMem = true; } showGate(); track('app_open', {}); }
+  else if (a === 'ageno') { document.getElementById('gate').innerHTML = `<div class="dlg card"><h2>${t('sorry')}</h2><p>${t('sorry_text')}</p></div>`; }
+  if (a !== 'menu') document.getElementById('mmenu')?.classList.remove('open');
+});
+document.addEventListener('input', ev => {
+  if (ev.target.id === 'flt') { flavorFilter = ev.target.value; renderPage(); }
+  else if (ev.target.id === 'f-phone') { form['f-phone'] = ev.target.value; }
+});
+document.addEventListener('keydown', ev => { if ((ev.key === 'Enter' || ev.key === ' ') && ev.target.matches('[role=button][data-act]')) { ev.preventDefault(); ev.target.click(); } });
+window.addEventListener('hashchange', onRoute);
+document.documentElement.lang = lang;
+showGate(); onRoute(); if (ageOk()) track('app_open', {});
+
+</script></body></html>
