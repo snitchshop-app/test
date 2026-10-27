@@ -121,13 +121,16 @@ label{display:block;font-size:13px;color:var(--mut);margin:16px 0 6px}input.in{w
 .btn:hover{transform:translateY(-1px)}.pc:active,.ct-tile:active{transform:scale(.985)}.qty button:active{transform:scale(.88)}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 .mmenu .mlang{display:flex;gap:8px;padding:14px 20px}.mmenu .mlang a{flex:none;padding:8px 18px;border:0;border-radius:99px;background:var(--s2);font-weight:600;font-size:14px;color:var(--mut)}.mmenu .mlang a.on{background:var(--mint);color:var(--onm)}
+.appbtn{display:flex;align-items:center;gap:8px;height:42px;padding:0 16px;border-radius:99px;font-size:14px;font-weight:600;color:var(--text);box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.22)}.appbtn:hover{background:var(--s2)}.appbtn svg{width:18px;height:18px;color:var(--mint)}
+.mmenu .mapp{display:flex;align-items:center;gap:10px;color:var(--mint);font-weight:600}.mmenu .mapp svg{width:20px;height:20px}
+@media(max-width:900px){.appbtn{display:none}}
 .mhead{display:block!important;margin-bottom:22px}.minfo h1{margin-top:2px}@media(max-width:900px){.mhead{margin-bottom:16px}}</style></head><body>
 <div id="app"></div><div id="gate" class="ov hidden"></div><div id="modal" class="ov hidden"></div>
 <script>
 // ===== Snitch Shop — сайт (отдельный от мини-приложения) =====
 const MANAGER_USERNAME = 'SnitchShopManager';
 const PROXY_URL = 'https://snitchshop-proxy.snitch-api.workers.dev';
-const BOT_USERNAME = '';   // впишем юзернейм нового бота — появится кнопка «Открыть в Telegram»
+const BOT_USERNAME = 'snitchshop_pl_bot';   // впишем юзернейм нового бота — появится кнопка «Открыть в Telegram»
 const IS_DRAFT = /\/test\//.test(location.pathname) || location.protocol === 'file:';  // в черновике статистику не пишем
 const IS_BOT = !!navigator.webdriver || /bot|crawl|spider|headless|preview|lighthouse/i.test(navigator.userAgent || '');
 const PRICING = {
@@ -140,7 +143,7 @@ const SALES = [];
 // ---------- тексты ----------
 const T = {
  pl: {
-  nav_catalog:'Katalog', nav_delivery:'Dostawa', nav_payment:'Płatność', nav_returns:'Zwrot i wymiana', nav_contact:'Kontakt', cart:'Koszyk',
+  nav_catalog:'Katalog', nav_app:'Mini-aplikacja', nav_delivery:'Dostawa', nav_payment:'Płatność', nav_returns:'Zwrot i wymiana', nav_contact:'Kontakt', cart:'Koszyk',
   hero_h:'Vapy z dostawą<br>w całej Polsce', hero_p:'Liquidy, jednorazówki i pody. Im więcej bierzesz, tym taniej.',
   open_catalog:'Zobacz katalog', mini_app:'Mini-aplikacja', chip1:'13 modeli', chip2:'271 smaków',
   perk1:'Smart Cena', perk1s:'Im więcej sztuk, tym niższa cena', perk2:'Płatność przy odbiorze', perk2s:'Lub kryptowaluta', perk3:'Dostawa od 25 zł', perk3s:'', perk4:'Zwrot i wymiana', perk4s:'Zasady na stronie',
@@ -170,7 +173,7 @@ const T = {
   msg_greeting:'Dzień dobry, proszę o potwierdzenie zamówienia', order_word:'ZAMÓWIENIE', price_word:'CENA', lang_btn:'RU', from:'od', tab_hit:'Hit',
  },
  ru: {
-  nav_catalog:'Каталог', nav_delivery:'Доставка', nav_payment:'Оплата', nav_returns:'Возврат и замена', nav_contact:'Контакты', cart:'Корзина',
+  nav_catalog:'Каталог', nav_app:'Мини-приложение', nav_delivery:'Доставка', nav_payment:'Оплата', nav_returns:'Возврат и замена', nav_contact:'Контакты', cart:'Корзина',
   hero_h:'Вейпы с доставкой<br>по всей Польше', hero_p:'Жидкости, одноразки и поды. Чем больше берёшь, тем дешевле.',
   open_catalog:'Открыть каталог', mini_app:'Мини-приложение', chip1:'13 моделей', chip2:'271 вкус',
   perk1:'Smart Cena', perk1s:'Чем больше штук, тем ниже цена', perk2:'Оплата при получении', perk2s:'Или криптовалюта', perk3:'Доставка от 25 zł', perk3s:'', perk4:'Возврат и замена', perk4s:'Условия на странице',
@@ -745,10 +748,13 @@ function groupCart() {
 const back = (href, label) => `<a class="back" href="${href}">${ico('back')}<span>${label}</span></a>`;
 function header(r) {
   const on = c => c ? 'on' : '';
+  const appUrl = BOT_USERNAME ? `https://t.me/${BOT_USERNAME}/app` : '';
+  const appLink = appUrl ? `<a class="appbtn" href="${appUrl}" target="_blank" rel="noopener" data-act="tgapp">${ico('tg')}<span>${t('nav_app')}</span></a>` : '';
+  const appItem = appUrl ? `<a class="mapp" href="${appUrl}" target="_blank" rel="noopener" data-act="tgapp">${ico('tg')}${t('nav_app')}</a>` : '';
   return `<header class="hdr"><div class="wrap hd"><a class="logo" href="#/">${imgTag('images/logo-icon.webp')}<span>Snitch Shop</span></a>
   <nav><a class="${on(r.page==='home'||r.page==='cat'||r.page==='model')}" href="#/">${t('nav_catalog')}</a><a href="#/info/d">${t('nav_delivery')}</a><a href="#/info/p">${t('nav_payment')}</a><a href="#/info/z">${t('nav_returns')}</a><a href="https://t.me/${MANAGER_USERNAME}" target="_blank" rel="noopener" data-act="mgr">${t('nav_contact')}</a></nav><span class="sp"></span>
-  <a class="lang" data-act="lang" role="button" tabindex="0">${lang==='pl'?'PL':'RU'}<i>/</i>${lang==='pl'?'RU':'PL'}</a><a class="cartbtn" href="#/cart">${ico('cart')}<span class="ct">${t('cart')}</span>${cartCount()?`<b class="cnt">${cartCount()}</b>`:''}</a><a class="burger" data-act="menu" role="button" tabindex="0" aria-label="Menu">${ico('menu')}</a></div>
-  <div class="mmenu" id="mmenu"><a href="#/">${t('nav_catalog')}</a><a href="#/info/d">${t('nav_delivery')}</a><a href="#/info/p">${t('nav_payment')}</a><a href="#/info/z">${t('nav_returns')}</a><a href="https://t.me/${MANAGER_USERNAME}" target="_blank" rel="noopener">${t('nav_contact')}</a><div class="mlang"><a data-act="setl" data-v="pl" role="button" tabindex="0" class="${lang==='pl'?'on':''}">PL</a><a data-act="setl" data-v="ru" role="button" tabindex="0" class="${lang==='ru'?'on':''}">RU</a></div></div></header>`;
+  <a class="lang" data-act="lang" role="button" tabindex="0">${lang==='pl'?'PL':'RU'}<i>/</i>${lang==='pl'?'RU':'PL'}</a>${appLink}<a class="cartbtn" href="#/cart">${ico('cart')}<span class="ct">${t('cart')}</span>${cartCount()?`<b class="cnt">${cartCount()}</b>`:''}</a><a class="burger" data-act="menu" role="button" tabindex="0" aria-label="Menu">${ico('menu')}</a></div>
+  <div class="mmenu" id="mmenu">${appItem}<a href="#/">${t('nav_catalog')}</a><a href="#/info/d">${t('nav_delivery')}</a><a href="#/info/p">${t('nav_payment')}</a><a href="#/info/z">${t('nav_returns')}</a><a href="https://t.me/${MANAGER_USERNAME}" target="_blank" rel="noopener">${t('nav_contact')}</a><div class="mlang"><a data-act="setl" data-v="pl" role="button" tabindex="0" class="${lang==='pl'?'on':''}">PL</a><a data-act="setl" data-v="ru" role="button" tabindex="0" class="${lang==='ru'?'on':''}">RU</a></div></div></header>`;
 }
 function footer() {
   const tg = BOT_USERNAME ? `<a href="https://t.me/${BOT_USERNAME}/app" target="_blank" rel="noopener" data-act="tgapp">${t('open_tg')}</a>` : '';
