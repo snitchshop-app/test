@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Snitch Shop</title>
+<meta name="description" content="Snitch Shop — liquidy i podsy. Szybkie zamówienie i dostawa. Tylko dla osób 18+.">
+<meta name="theme-color" content="#0f0f13">
 <script src="https://telegram.org/js/telegram-web-app.js">
   function contactManager() {
     window.open('https://t.me/SnitchShopManager', '_blank');
@@ -399,7 +401,22 @@
     word-wrap: break-word;
   }
   
-  </style>
+    /* ===== ВЕРСИЯ ДЛЯ САЙТА (обычный браузер) ===== */
+  .age-overlay { position: fixed; inset: 0; z-index: 20000; display: flex; align-items: center; justify-content: center; padding: 24px; background: rgba(10,8,20,0.94); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+  .age-overlay.hidden { display: none; }
+  .age-card { background: var(--surface); border: 1px solid var(--text); border-radius: 22px; padding: 30px 24px 26px; width: 100%; max-width: 360px; text-align: center; }
+  .age-card img { width: 110px; height: 110px; object-fit: contain; margin-bottom: 10px; }
+  .age-title { font-size: 20px; font-weight: 800; margin-bottom: 6px; }
+  .age-text { font-size: 13px; color: var(--text2); line-height: 1.45; margin-bottom: 18px; }
+  .age-btn { display: block; width: 100%; border: none; border-radius: 12px; padding: 14px; font-size: 15px; font-weight: 700; cursor: pointer; margin-bottom: 10px; }
+  .age-yes { background: var(--accent); color: #fff; }
+  .age-no { background: var(--surface2); color: var(--text); border: 1px solid var(--border); }
+  @media (min-width: 700px) {
+    html.web { background: #07070b; }
+    html.web body { max-width: 520px; margin: 0 auto; border-left: 1px solid var(--border); border-right: 1px solid var(--border); }
+    html.web .cart-bar { left: 50%; right: auto; width: 520px; transform: translateX(-50%); }
+  }
+</style>
 </head>
 <body>
 
@@ -441,6 +458,10 @@
         </a>
         <a href="javascript:goToPage('returns')" class="footer-link">
           <span data-i18n="footer_returns">Возврат и замена</span>
+          <span style="font-size:16px;color:var(--text)">›</span>
+        </a>
+        <a href="#" target="_blank" class="footer-link" id="tg-app-link" style="display:none" onclick="trackEvent('tgapp_click', { src: 'footer' })">
+          <span data-i18n="footer_tgapp">Открыть в Telegram</span>
           <span style="font-size:16px;color:var(--text)">›</span>
         </a>
         <a href="https://t.me/SnitchShopManager" target="_blank" class="footer-link" onclick="trackEvent('manager_click', { src: 'footer' })">
@@ -556,6 +577,11 @@
   </div>
 </div>
 
+
+<!-- AGE GATE (только на сайте, не в Telegram) -->
+<div class="age-overlay hidden" id="age-overlay">
+  <div class="age-card" id="age-card"></div>
+</div>
 
 <!-- SPLASH SCREEN -->
 <div class="splash-overlay" id="splash">
@@ -1009,7 +1035,8 @@ async function onManagerClick(ev) {
   orderCreated = true;
   trackEvent('order_submitted', { pay: pendingOrder.pay, total: cartTotal() });
   try {
-    if (window.Telegram?.WebApp?.openTelegramLink) Telegram.WebApp.openTelegramLink(url);
+    if (IS_WEB) location.href = url;   // сайт: переход в чат менеджера (окно после запроса браузер мог бы заблокировать)
+    else if (window.Telegram?.WebApp?.openTelegramLink) Telegram.WebApp.openTelegramLink(url);
     else window.open(url, '_blank');
   } catch (e) { window.open(url, '_blank'); }
 }
@@ -1124,6 +1151,7 @@ const TRANS = {
     footer_payment: 'Оплата',
     footer_returns: 'Возврат и замена',
     footer_manager: 'Контакт с менеджером',
+    footer_tgapp: 'Открыть в Telegram',
     
     // Информационные страницы
     info_delivery_title: 'Доставка',
@@ -1217,6 +1245,7 @@ const TRANS = {
     footer_payment: 'Płatność',
     footer_returns: 'Zwrot i wymiana',
     footer_manager: 'Kontakt z menedżerem',
+    footer_tgapp: 'Otwórz w Telegramie',
     
     // Informacyjne strony
     info_delivery_title: 'Dostawa',
@@ -1309,6 +1338,7 @@ function selectLang(l) {
   if (active === 's-cart') renderCart();
   if (active === 's-order') renderOrderForm();
   updateCartBar();
+  showAgeGate();   // сайт: после выбора языка спрашиваем про возраст
 }
 
 function showLimitAlert() {
@@ -1679,11 +1709,29 @@ const tg = window.Telegram?.WebApp;
 if (tg) { tg.ready(); tg.expand(); }
 
 // ============================================================
+// РЕЖИМ САЙТА: страница открыта в обычном браузере, а не внутри Telegram
+// ============================================================
+const IS_WEB = !(tg && tg.initData);
+if (IS_WEB) document.documentElement.classList.add('web');
+// Юзернейм бота для кнопки «Открыть в Telegram» (без @). Пока пусто — кнопка скрыта.
+const BOT_USERNAME = '';
+const IS_BOT = !!(navigator.webdriver) || /bot|crawl|spider|headless|preview|facebookexternalhit|lighthouse|pagespeed/i.test(navigator.userAgent || '');
+let _ageMem = false;
+function ageOk() { try { return localStorage.getItem('sh_age18') === '1'; } catch (e) { return _ageMem; } }
+let WEB_TRACK = IS_WEB && !IS_BOT && ageOk();   // статистику с сайта считаем только после подтверждения 18+
+
+// ============================================================
 // ТРЕКИНГ РЕКЛАМНЫХ КАМПАНИЙ
 // Ссылка вида t.me/snitchsh0p_bot/app?startapp=НАЗВАНИЕ_КАМПАНИИ
 // ============================================================
 function readStartParam() {
   let p = tg?.initDataUnsafe?.start_param || '';
+  if (!p) {   // сайт: метка кампании в обычной ссылке, например ?c=ogg_fb_1
+    try {
+      const q = new URLSearchParams(location.search);
+      p = q.get('c') || q.get('utm_campaign') || q.get('campaign') || q.get('startapp') || '';
+    } catch (e) {}
+  }
   if (!p) {
     try {
       const m = (location.hash + '&' + location.search).match(/tgWebAppStartParam=([^&]+)/);
@@ -1733,8 +1781,9 @@ function getUid() {
 }
 
 function trackEvent(event, extra, campaignOverride) {
-  // Статистика только из Telegram: роботы и заходы из обычного браузера не считаются
-  if (FROM_MAILING || !tg?.initData) return;
+  // Статистика: из Telegram — всегда; с сайта — только после подтверждения 18+ и не от роботов
+  if (FROM_MAILING || (!tg?.initData && !WEB_TRACK)) return;
+  if (IS_WEB) extra = Object.assign({ src: 'web' }, extra || {});
   try {
     fetch(`${PROXY_URL}/track`, {
       method: 'POST',
@@ -1750,10 +1799,48 @@ function trackEvent(event, extra, campaignOverride) {
   } catch (e) {}
 }
 
-// «Перешёл по ссылке» — считаем именно по метке этой сессии (или direct, если метки нет)
+// Кнопка «Открыть в Telegram» на сайте (если задан BOT_USERNAME)
+{
+  const a = document.getElementById('tg-app-link');
+  if (a && IS_WEB && BOT_USERNAME) {
+    const c = getCampaign();
+    a.href = 'https://t.me/' + BOT_USERNAME + '/app' + (c && c !== 'direct' ? '?startapp=' + encodeURIComponent(c) : '');
+    a.style.display = '';
+  }
+}
+// Проверка возраста 18+ (только на сайте): показывается ПОСЛЕ выбора языка, на выбранном языке
+const AGE_TXT = {
+  pl: { title: 'Czy masz ukończone 18 lat?', text: 'Produkty zawierają nikotynę, która uzależnia. Sprzedaż tylko osobom pełnoletnim.', yes: 'Tak, mam 18+', no: 'Nie', sorry: 'Przykro nam', sorryText: 'Strona tylko dla osób pełnoletnich.' },
+  ru: { title: 'Вам есть 18 лет?', text: 'Товары содержат никотин, вызывающий привыкание. Продажа только лицам старше 18 лет.', yes: 'Да, мне 18+', no: 'Нет', sorry: 'Сожалеем', sorryText: 'Сайт только для лиц старше 18 лет.' }
+};
+function ageT() { return AGE_TXT[lang === 'ru' ? 'ru' : 'pl']; }
+function showAgeGate() {
+  const el = document.getElementById('age-overlay');
+  if (!el || !IS_WEB || ageOk()) return;
+  const t = ageT();
+  document.getElementById('age-card').innerHTML =
+    '<img src="images/mascot.webp" alt="Snitch Shop" onerror="this.style.display=\'none\'">' +
+    '<div class="age-title">' + t.title + '</div>' +
+    '<div class="age-text">' + t.text + '</div>' +
+    '<button class="age-btn age-yes" onclick="ageYes()">' + t.yes + '</button>' +
+    '<button class="age-btn age-no" onclick="ageNo()">' + t.no + '</button>';
+  el.classList.remove('hidden');
+}
+if (lang) showAgeGate();   // язык уже выбран раньше, а возраст ещё не подтверждён
+function ageYes() {
+  try { localStorage.setItem('sh_age18', '1'); } catch (e) { _ageMem = true; }
+  document.getElementById('age-overlay').classList.add('hidden');
+  if (IS_WEB && !IS_BOT) { WEB_TRACK = true; trackEvent('app_open', null, SESSION_CAMPAIGN || getCampaign()); }
+}
+function ageNo() {
+  const t = ageT();
+  document.getElementById('age-card').innerHTML = '<div class="age-title">' + t.sorry + '</div><div class="age-text">' + t.sorryText + '</div>';
+}
+
+// «Перешёл по ссылке» — метка этой сессии; если её нет, берём запомненную рекламную метку (30 дней), иначе direct
 {
   const u = tg?.initDataUnsafe?.user || {};
-  trackEvent('app_open', (u.username || u.first_name) ? { u: u.username || '', n: (u.first_name || '').slice(0, 40) } : null, SESSION_CAMPAIGN || 'direct');
+  trackEvent('app_open', (u.username || u.first_name) ? { u: u.username || '', n: (u.first_name || '').slice(0, 40) } : null, SESSION_CAMPAIGN || getCampaign());
 }
 
 // ============================================================
