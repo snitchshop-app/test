@@ -120,6 +120,7 @@ label{display:block;font-size:13px;color:var(--mut);margin:16px 0 6px}input.in{w
 .btn,.qty button,.fv,.pc,.ct-tile,.tier,.seg div,.cartbtn{transition:transform .18s ease,background .18s ease,filter .18s ease,box-shadow .18s ease}
 .btn:hover{transform:translateY(-1px)}.pc:active,.ct-tile:active{transform:scale(.985)}.qty button:active{transform:scale(.88)}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+.mmenu .mlang{display:flex;gap:8px;padding:14px 20px}.mmenu .mlang a{flex:none;padding:8px 18px;border:0;border-radius:99px;background:var(--s2);font-weight:600;font-size:14px;color:var(--mut)}.mmenu .mlang a.on{background:var(--mint);color:var(--onm)}
 .mhead{display:block!important;margin-bottom:22px}.minfo h1{margin-top:2px}@media(max-width:900px){.mhead{margin-bottom:16px}}</style></head><body>
 <div id="app"></div><div id="gate" class="ov hidden"></div><div id="modal" class="ov hidden"></div>
 <script>
@@ -164,7 +165,7 @@ const T = {
   i_paczkomat:'<b>Paczkomat</b> – odbiór osobisty w Paczkomacie.', i_zabka:'<b>Żabka</b> – odbiór osobisty w sklepie Żabka.', i_kurier:'<b>Kurier</b> – paczka dostarczana bezpośrednio pod drzwi.',
   i_pay_courier:'Przy dostawie kurierem:', i_pay_pickup:'Przy odbiorze (Paczkomat/Żabka):', i_pay_crypto:'Przedpłata kryptowalutą:',
   i_ret1:'1. Napisz menedżerowi na Telegramie i opisz problem.', i_ret2:'2. Wyślij zdjęcie lub wideo pokazujące wadę produktu.',
-  foot_about:'Dostawa w Polsce: Paczkomat InPost, Żabka, kurier.<br>Zamówienie potwierdza menedżer w Telegramie.', foot_info:'Informacje', foot_contact:'Kontakt', foot_age:'Strona tylko dla osób pełnoletnich (18+). Produkty zawierają nikotynę, która uzależnia.',
+  foot_about:'Dostawa w Polsce: Paczkomat InPost, Żabka, kurier.<br>Zamówienie potwierdza menedżer w Telegramie.', foot_info:'Informacje', foot_contact:'Kontakt', foot_age:'Strona tylko dla osób pełnoletnich (18+).',
   age_title:'Czy masz ukończone 18 lat?', age_text:'Produkty zawierają nikotynę, która uzależnia. Sprzedaż tylko osobom pełnoletnim.', age_yes:'Tak, mam 18+', age_no:'Nie', sorry:'Przykro nam', sorry_text:'Strona tylko dla osób pełnoletnich.', pick_lang:'Wybierz język', ok:'OK',
   msg_greeting:'Dzień dobry, proszę o potwierdzenie zamówienia', order_word:'ZAMÓWIENIE', price_word:'CENA', lang_btn:'RU', from:'od', tab_hit:'Hit',
  },
@@ -194,7 +195,7 @@ const T = {
   i_paczkomat:'<b>Paczkomat</b> – самовывоз посылки в Paczkomat.', i_zabka:'<b>Żabka</b> – самовывоз посылки в магазине Żabka.', i_kurier:'<b>Курьер</b> – посылка доставляется прямо к вашей двери.',
   i_pay_courier:'При доставке курьером:', i_pay_pickup:'При самовывозе (Paczkomat/Żabka):', i_pay_crypto:'Предоплата криптовалютой:',
   i_ret1:'1. Напиши менеджеру в Telegram и опиши проблему.', i_ret2:'2. Отправь фото или видео, показывающее дефект товара.',
-  foot_about:'Доставка по Польше: InPost Paczkomat, Żabka, курьер.<br>Заказ подтверждает менеджер в Telegram.', foot_info:'Информация', foot_contact:'Связь', foot_age:'Сайт только для лиц старше 18 лет. Товары содержат никотин, вызывающий привыкание.',
+  foot_about:'Доставка по Польше: InPost Paczkomat, Żabka, курьер.<br>Заказ подтверждает менеджер в Telegram.', foot_info:'Информация', foot_contact:'Связь', foot_age:'Сайт только для лиц старше 18 лет.',
   age_title:'Вам есть 18 лет?', age_text:'Товары содержат никотин, вызывающий привыкание. Продажа только лицам старше 18 лет.', age_yes:'Да, мне 18+', age_no:'Нет', sorry:'Сожалеем', sorry_text:'Сайт только для лиц старше 18 лет.', pick_lang:'Выберите язык', ok:'OK',
   msg_greeting:'Dzień dobry, proszę o potwierdzenie zamówienia', order_word:'ЗАКАЗ', price_word:'CENA', lang_btn:'PL', from:'от', tab_hit:'Хит',
  }
@@ -747,7 +748,7 @@ function header(r) {
   return `<header class="hdr"><div class="wrap hd"><a class="logo" href="#/">${imgTag('images/logo-icon.webp')}<span>Snitch Shop</span></a>
   <nav><a class="${on(r.page==='home'||r.page==='cat'||r.page==='model')}" href="#/">${t('nav_catalog')}</a><a href="#/info/d">${t('nav_delivery')}</a><a href="#/info/p">${t('nav_payment')}</a><a href="#/info/z">${t('nav_returns')}</a><a href="https://t.me/${MANAGER_USERNAME}" target="_blank" rel="noopener" data-act="mgr">${t('nav_contact')}</a></nav><span class="sp"></span>
   <a class="lang" data-act="lang" role="button" tabindex="0">${lang==='pl'?'PL':'RU'}<i>/</i>${lang==='pl'?'RU':'PL'}</a><a class="cartbtn" href="#/cart">${ico('cart')}<span class="ct">${t('cart')}</span>${cartCount()?`<b class="cnt">${cartCount()}</b>`:''}</a><a class="burger" data-act="menu" role="button" tabindex="0" aria-label="Menu">${ico('menu')}</a></div>
-  <div class="mmenu" id="mmenu"><a href="#/">${t('nav_catalog')}</a><a href="#/info/d">${t('nav_delivery')}</a><a href="#/info/p">${t('nav_payment')}</a><a href="#/info/z">${t('nav_returns')}</a><a href="https://t.me/${MANAGER_USERNAME}" target="_blank" rel="noopener">${t('nav_contact')}</a><a data-act="lang">${lang==='pl'?'Русский':'Polski'}</a></div></header>`;
+  <div class="mmenu" id="mmenu"><a href="#/">${t('nav_catalog')}</a><a href="#/info/d">${t('nav_delivery')}</a><a href="#/info/p">${t('nav_payment')}</a><a href="#/info/z">${t('nav_returns')}</a><a href="https://t.me/${MANAGER_USERNAME}" target="_blank" rel="noopener">${t('nav_contact')}</a><div class="mlang"><a data-act="setl" data-v="pl" role="button" tabindex="0" class="${lang==='pl'?'on':''}">PL</a><a data-act="setl" data-v="ru" role="button" tabindex="0" class="${lang==='ru'?'on':''}">RU</a></div></div></header>`;
 }
 function footer() {
   const tg = BOT_USERNAME ? `<a href="https://t.me/${BOT_USERNAME}/app" target="_blank" rel="noopener" data-act="tgapp">${t('open_tg')}</a>` : '';
@@ -933,6 +934,7 @@ document.addEventListener('click', ev => {
   const a = el.dataset.act;
   if (a === 'inc') setQty(el.dataset.key, 1);
   else if (a === 'dec') setQty(el.dataset.key, -1);
+  else if (a === 'setl') { setLang(el.dataset.v); renderPage(); }
   else if (a === 'lang') { setLang(lang === 'pl' ? 'ru' : 'pl'); renderPage(); }
   else if (a === 'setlang') { setLang(el.dataset.v); showGate(); renderPage(); }
   else if (a === 'menu') document.getElementById('mmenu').classList.toggle('open');
