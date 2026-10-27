@@ -118,6 +118,9 @@ a:focus-visible,[role=button]:focus-visible,button:focus-visible,input:focus-vis
 .f.out .q{pointer-events:none}.crumb a:hover{color:var(--text)}.sale-note{color:#4ade80}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 @media(min-width:1000px){.models{grid-template-columns:repeat(4,1fr)}}
+.grp{padding:12px;margin-bottom:10px}.gh{display:flex;gap:14px;align-items:center;padding-bottom:10px;border-bottom:1px solid var(--border);margin-bottom:4px}.gh .th{width:56px;height:56px;border-radius:10px;overflow:hidden;flex:none;background:#000}.gh .th img{width:100%;height:100%;object-fit:cover}.gh .nm{flex:1;min-width:0}.gh b{display:block}.gh small{color:var(--text2);font-size:13px}.gh .sm,.gr .sm{font-weight:700;min-width:70px;text-align:right}
+.gr{display:flex;align-items:center;gap:12px;padding:8px 0}.gr span{flex:1;min-width:0;color:var(--text2);font-size:15px}.gr+.gr{border-top:1px solid rgba(255,255,255,.04)}
+@media(max-width:900px){.gr{flex-wrap:wrap}.gr span{flex:1 1 100%;color:var(--text)}.gr .q{margin-right:auto}}
 </style></head><body>
 <div id="app"></div><div id="gate" class="ov hidden"></div><div id="modal" class="ov hidden"></div>
 <script>
@@ -138,9 +141,9 @@ const SALES = [];
 const T = {
  pl: {
   nav_catalog:'Katalog', nav_delivery:'Dostawa', nav_payment:'Płatność', nav_returns:'Zwrot i wymiana', nav_contact:'Kontakt', cart:'Koszyk',
-  hero_h:'Vapy z dostawą<br>w całej Polsce', hero_p:'Wybieraj smaki i zbieraj koszyk — cena za sztukę spada razem z ilością. Potwierdzenie zamówienia w Telegramie.',
+  hero_h:'Vapy z dostawą<br>w całej Polsce', hero_p:'Liquidy, jednorazówki i pody. Im więcej bierzesz, tym taniej.',
   open_catalog:'Zobacz katalog', mini_app:'Mini-aplikacja', chip1:'13 modeli', chip2:'271 smaków',
-  perk1:'Smart Cena', perk1s:'Im więcej sztuk, tym niższa cena', perk2:'Płatność przy odbiorze', perk2s:'Lub kryptowaluta', perk3:'Dostawa od 25 zł', perk3s:'40 zł przy zamówieniu od 2500 zł', perk4:'Zwrot i wymiana', perk4s:'Zasady na stronie',
+  perk1:'Smart Cena', perk1s:'Im więcej sztuk, tym niższa cena', perk2:'Płatność przy odbiorze', perk2s:'Lub kryptowaluta', perk3:'Dostawa od 25 zł', perk3s:'', perk4:'Zwrot i wymiana', perk4s:'Zasady na stronie',
   categories:'Kategorie', all_models:'Wszystkie modele', how:'Jak zamówić',
   s1:'Wybierz smaki', s1s:'Dodaj produkty do koszyka — cena przeliczy się sama', s2:'Podaj dane dostawy', s2s:'Imię, telefon, Paczkomat, Żabka lub kurier', s3:'Napisz do menedżera', s3s:'Zamówienie jest zarezerwowane, menedżer potwierdza je w Telegramie',
   tgapp:'Mini-aplikacja w Telegramie', tgapp_s:'Ten sam katalog w Telegramie — wygodniej z telefonu.', open_tg:'Otwórz w Telegramie', manager:'Menedżer', manager_s:'Pytania o dostępność, płatność i dostawę.',
@@ -168,9 +171,9 @@ const T = {
  },
  ru: {
   nav_catalog:'Каталог', nav_delivery:'Доставка', nav_payment:'Оплата', nav_returns:'Возврат и замена', nav_contact:'Контакты', cart:'Корзина',
-  hero_h:'Вейпы с доставкой<br>по всей Польше', hero_p:'Выбирайте вкусы, собирайте корзину — цена за штуку падает вместе с количеством. Подтверждение заказа в Telegram.',
+  hero_h:'Вейпы с доставкой<br>по всей Польше', hero_p:'Жидкости, одноразки и поды. Чем больше берёшь, тем дешевле.',
   open_catalog:'Открыть каталог', mini_app:'Мини-приложение', chip1:'13 моделей', chip2:'271 вкус',
-  perk1:'Smart Cena', perk1s:'Чем больше штук, тем ниже цена', perk2:'Оплата при получении', perk2s:'Или криптовалюта', perk3:'Доставка от 25 zł', perk3s:'40 zł для заказов от 2500 zł', perk4:'Возврат и замена', perk4s:'Условия на странице',
+  perk1:'Smart Cena', perk1s:'Чем больше штук, тем ниже цена', perk2:'Оплата при получении', perk2s:'Или криптовалюта', perk3:'Доставка от 25 zł', perk3s:'', perk4:'Возврат и замена', perk4s:'Условия на странице',
   categories:'Категории', all_models:'Все модели', how:'Как заказать',
   s1:'Выберите вкусы', s1s:'Добавьте товары в корзину, цена пересчитается сама', s2:'Заполните доставку', s2s:'Имя, телефон, Paczkomat, Żabka или курьер', s3:'Напишите менеджеру', s3s:'Заказ резервируется, менеджер подтверждает в Telegram',
   tgapp:'Мини-приложение в Telegram', tgapp_s:'Тот же каталог внутри Telegram — быстрее с телефона.', open_tg:'Открыть в Telegram', manager:'Менеджер', manager_s:'Вопросы по наличию, оплате и доставке.',
@@ -749,12 +752,12 @@ function modelCard(cat, m) {
   return `<a class="card m" href="#/model/${m.id}">${sale?`<span class="badge">${t('sale')}</span>`:''}<div class="ph">${imgTag(m.img, m.name)}</div><b>${esc(m.name)}</b><div class="price">${priceHtml(cat, m)}</div></a>`;
 }
 function home() {
-  const perks = [['tag','perk1','perk1s'],['wallet','perk2','perk2s'],['truck','perk3','perk3s'],['swap','perk4','perk4s']].map(([i,a,b]) => `<div class="card perk">${ico(i)}<div><b>${t(a)}</b><span>${t(b)}</span></div></div>`).join('');
+  const perks = [['tag','perk1','perk1s'],['wallet','perk2','perk2s'],['truck','perk3','perk3s'],['swap','perk4','perk4s']].map(([i,a,b]) => `<div class="card perk">${ico(i)}<div><b>${t(a)}</b>${t(b)?`<span>${t(b)}</span>`:''}</div></div>`).join('');
   const cats = catalog.map(c => `<a class="card cat" href="#/cat/${c.id}"><div class="ph">${imgTag(c.img, catName(c))}</div><div class="t"><div>${catName(c)}<small>${c.models.length} ${t('models_n', c.models.length)}</small></div>${ico('arrow')}</div></a>`).join('');
   const all = catalog.map(c => `<div class="sechead"><h3 style="margin:18px 0 12px;color:var(--text2);font-size:15px;font-weight:600;text-transform:uppercase;letter-spacing:.5px">${catName(c)}</h3></div><div class="models">${c.models.map(m => modelCard(c, m)).join('')}</div>`).join('');
   const steps = [['s1','s1s'],['s2','s2s'],['s3','s3s']].map(([a,b],i) => `<div class="card step"><span>${i+1}</span><b>${t(a)}</b><p>${t(b)}</p></div>`).join('');
   const tgBtn = BOT_USERNAME ? `<a class="btn p" href="https://t.me/${BOT_USERNAME}/app" target="_blank" rel="noopener" data-act="tgapp">${t('open_tg')}</a>` : `<span class="chip">@${MANAGER_USERNAME}</span>`;
-  return `<div class="wrap"><section class="hero"><div><h1>${t('hero_h')}</h1><p>${t('hero_p')}</p><div class="acts"><a class="btn p lg" href="#catalog" data-act="scroll">${t('open_catalog')} ${ico('arrow')}</a>${BOT_USERNAME?`<a class="btn lg" href="https://t.me/${BOT_USERNAME}/app" target="_blank" rel="noopener" data-act="tgapp">${ico('tg')} ${t('mini_app')}</a>`:''}</div><div class="chips"><span class="chip">${t('chip1')}</span><span class="chip">${t('chip2')}</span><span class="chip">Paczkomat · Żabka · Kurier</span></div></div><div class="ban"><img src="images/banner-oferta.png" alt="Super oferta"></div></section>
+  return `<div class="wrap"><section class="hero"><div><h1>${t('hero_h')}</h1><p>${t('hero_p')}</p><div class="acts"><a class="btn p lg" href="#catalog" data-act="scroll">${t('open_catalog')} ${ico('arrow')}</a>${BOT_USERNAME?`<a class="btn lg" href="https://t.me/${BOT_USERNAME}/app" target="_blank" rel="noopener" data-act="tgapp">${ico('tg')} ${t('mini_app')}</a>`:''}</div></div><div class="ban"><img src="images/banner-oferta.png" alt="Super oferta"></div></section>
   <div class="perks">${perks}</div><section class="sec" id="catalog"><h2>${t('categories')}</h2><div class="cats">${cats}</div></section><section class="sec"><h2>${t('all_models')}</h2>${all}</section><section class="sec"><h2>${t('how')}</h2><div class="steps">${steps}</div></section>
   <section class="sec"><div class="tg"><div class="card tgc"><div class="ico">${ico('tg')}</div><div><b>${t('tgapp')}</b><p>${t('tgapp_s')}</p>${tgBtn}</div></div><div class="card tgc"><div class="ico">${ico('user')}</div><div><b>${t('manager')}</b><p>${t('manager_s')}</p><a class="btn" href="https://t.me/${MANAGER_USERNAME}" target="_blank" rel="noopener" data-act="mgr">@${MANAGER_USERNAME}</a></div></div></div></section></div>`;
 }
@@ -770,19 +773,29 @@ function modelPage(id) {
   const rows = tt.map(([q, p], i) => { const nx = tt[i+1]?.[0], lab = i === tt.length-1 ? `${q}+` : (nx-1 === q ? `${q}` : `${q}–${nx-1}`); const on = q === cur;
     return `<tr class="${on?'now':''}"><td>${lab} ${t('pcs')}</td><td>${bt[i][1] !== p ? `<s style="color:#8b8b96">${bt[i][1]}</s> ` : ''}${p} zł</td><td>${on?t('your_level'):''}</td></tr>`; }).join('');
   const fixed = tt.length === 1;
-  const q = flavorFilter.trim().toLowerCase();
+  const q = '';
   const fl = m.flavors.filter(x => !q || x.toLowerCase().includes(q)).map(name => {
     const key = m.id + '::' + name, qty = cart[key]?.qty || 0, st = stockOf(key), out = st !== null && st <= 0;
     return `<div class="card f ${qty?'has':''} ${out?'out':''}"><div><span>${esc(name)}</span>${out?`<small>${t('out')}</small>`:''}</div><div class="q ${out?'dis':''}"><button data-act="dec" data-key="${esc(key)}" aria-label="−">${ico('minus')}</button><em>${out?'–':qty}</em><button data-act="inc" data-key="${esc(key)}" aria-label="+">${ico('plus')}</button></div></div>`; }).join('');
   return `<div class="wrap">${crumb(`<a href="#/">${t('home')}</a>`, `<a href="#/cat/${cat.id}">${catName(cat)}</a>`, esc(m.name))}<div class="layout"><aside class="side"><div class="ph">${imgTag(m.img, m.name)}</div><h1>${esc(m.name)}</h1><div class="price">${priceHtml(cat, m)}</div>
   ${fixed ? '' : `<div class="card"><table><tr><th colspan="3">${t('smart')}${sale?` · ${t('sale')}`:''}</th></tr>${rows}</table></div>`}</aside>
-  <main><div class="card search">${ico('search')}<input id="flt" value="${esc(flavorFilter)}" placeholder="${t('search')}" autocomplete="off"></div><div class="fl">${fl}</div></main></div></div>`;
+  <main><div class="fl">${fl}</div></main></div></div>`;
+}
+function groupCart() {
+  const T_ = pricingQty(), order = [];
+  catalog.forEach(c => c.models.forEach(m => order.push(m.id)));
+  const by = {};
+  Object.values(cart).filter(i => i.qty > 0).forEach(i => { (by[i.model] = by[i.model] || { model: i.model, modelName: i.modelName, items: [], qty: 0, sum: 0 }); const g = by[i.model]; g.items.push(i); g.qty += i.qty; g.sum += i.qty * unitPrice(i, T_); });
+  Object.values(by).forEach(g => { const f = findModel(g.model); if (f) g.items.sort((a, b) => f.m.flavors.indexOf(a.flavor) - f.m.flavors.indexOf(b.flavor)); });
+  return Object.values(by).sort((a, b) => order.indexOf(a.model) - order.indexOf(b.model));
 }
 function cartPage() {
   const items = Object.entries(cart).filter(([,i]) => i.qty > 0);
   if (!items.length) return `<div class="wrap"><div class="center"><h1>${t('cart_empty')}</h1><p>${t('cart_empty_sub')}</p><a class="btn p lg" href="#/">${t('open_catalog')}</a></div></div>`;
   const T_ = pricingQty();
-  const rows = items.map(([key, i]) => { const f = findModel(i.model); return `<div class="card row"><div class="th">${imgTag(f?.m.img || '', i.modelName)}</div><div class="nm"><b>${esc(i.modelName)}</b><small>${esc(i.flavor)}</small></div><div class="q"><button data-act="dec" data-key="${esc(key)}">${ico('minus')}</button><em>${i.qty}</em><button data-act="inc" data-key="${esc(key)}">${ico('plus')}</button></div><div class="sm">${fmt(i.qty*unitPrice(i,T_))}</div></div>`; }).join('');
+  const groups = groupCart();
+  const rows = groups.map(g => { const f = findModel(g.model);
+    return `<div class="card grp"><div class="gh"><div class="th">${imgTag(f?.m.img || '', g.modelName)}</div><div class="nm"><b>${esc(g.modelName)}</b><small>${g.qty} ${t('pcs')}</small></div><div class="sm">${fmt(g.sum)}</div></div>${g.items.map(i => `<div class="gr"><span>${esc(i.flavor)}</span><div class="q"><button data-act="dec" data-key="${esc(i.key)}" aria-label="−">${ico('minus')}</button><em>${i.qty}</em><button data-act="inc" data-key="${esc(i.key)}" aria-label="+">${ico('plus')}</button></div><div class="sm">${fmt(i.qty*unitPrice(i,T_))}</div></div>`).join('')}</div>`; }).join('');
   const sv = cartSavings();
   return `<div class="wrap pg"><h1>${t('cart_title')}</h1><div class="sub">${items.length} ${t('pos_in_cart')}</div><div class="two"><div>${rows}<a class="btn" href="#/" style="margin-top:6px">${ico('plus')} ${t('add_more')}</a></div>
   <aside class="card sum"><div class="l"><span>${t('positions')}</span><b>${items.length}</b></div>${sv>0?`<div class="l"><span>${t('discount')}</span><b style="color:#4ade80">−${fmt(sv)}</b></div>`:''}${upsell()}<div class="tot"><span>${t('total')}</span><span>${fmt(cartTotal())}</span></div><a class="btn p lg" href="#/order" data-act="checkout" style="width:100%;margin-top:16px">${t('checkout')} ${ico('arrow')}</a></aside></div></div>`;
@@ -790,7 +803,7 @@ function cartPage() {
 const field = (id, label, ph='', hint='', type='text', mode='') => `<label for="${id}">${label}</label><input class="in" id="${id}" type="${type}" ${mode?`inputmode="${mode}"`:''} placeholder="${esc(ph)}" value="${esc(form[id] || '')}" autocomplete="off">${hint?`<div class="hint">${hint}</div>`:''}`;
 function orderPage() {
   if (!cartCount()) return cartPage();
-  const lines = Object.values(cart).filter(i => i.qty > 0).map(i => `<div class="l"><span>${esc(i.modelName)} · ${esc(i.flavor)}</span><b>× ${i.qty}</b></div>`).join('');
+  const lines = groupCart().map(g => `<div class="l" style="flex-direction:column;gap:2px"><b style="color:var(--text)">${esc(g.modelName)}</b>${g.items.map(i => `<span style="display:flex;justify-content:space-between;font-size:14px"><span>${esc(i.flavor)}</span><b style="color:var(--text)">× ${i.qty}</b></span>`).join('')}</div>`).join('');
   const sv = cartSavings(), total = cartTotal(), dc = deliveryCost();
   const dl = { paczkomat: field('f-kodpacz', t('lbl_kodpacz'), 'WAW123M', t('paczkomat_hint')), zabka: field('f-zabka', t('lbl_zabka'), '', t('zabka_hint')),
     kurier: field('f-kod', t('lbl_zip'), '00-001', '', 'text', 'numeric') + field('f-ulica', t('lbl_street')) + field('f-budynek', t('lbl_building'), '10') + field('f-lokal', t('lbl_flat'), t('lbl_flat_ph')) }[delivery];
@@ -870,8 +883,8 @@ function saveForm() { document.querySelectorAll('.fm input').forEach(el => { for
 async function confirmOrder() {
   saveForm();
   const total = cartTotal(), dc = deliveryCost(), count = cartCount();
-  const lines = {}; Object.values(cart).forEach(i => { (lines[i.modelName] = lines[i.modelName] || []).push(i); });
-  let ol = ''; Object.entries(lines).forEach(([m, its]) => { ol += m + '\n'; its.forEach(i => { ol += `${i.flavor} x${i.qty}\n`; }); ol += '\n'; });
+  const T_ = pricingQty();
+  let ol = ''; groupCart().forEach(g => { ol += g.modelName + '\n'; g.items.forEach(i => { ol += `${i.flavor} x${i.qty} - ${unitPrice(i, T_)} ZŁ\n`; }); ol += '\n'; });
   let msg = `${T.pl.msg_greeting}\n\n`, buyer, shipping = {}, deliveryLabel = '';
   if (payMethod === 'crypto') {
     buyer = { full_name: 'Криптовалюта — ожидает данные от менеджера', phone: '' };
